@@ -4,5 +4,9 @@ terraform {
       source = "hashicorp/helm"
       version = "~> 3.1.1"
     }
+    jinja = {
+      source = "NikolaLohinski/jinja"
+      version = "~> 2.4.3"
+    }
   }
 }

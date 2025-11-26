@@ -12,9 +12,33 @@ locals {
   password_file_path = "/etc/mosquitto/passwordfile"
 }
 
+locals {
+  configuration_template_path = "${path.module}/templates/configuration.j2"
+  jinja_context = {
+    data_persistence_enabled = var.data_persistence_enabled
+    persistence_path         = local.persistence_path
+    password_file_path       = local.password_file_path
+    mqtt_port                = var.mqtt_port
+    websocket_port           = var.websocket_port
+  }
+}
+
+data "jinja_template" "configuration" {
+  context {
+    type = "json"
+    data = local.jinja_context
+  }
+
+  source {
+    directory = dirname(local.configuration_template_path)
+    template  = file(local.configuration_template_path)
+  }
+}
+
 resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace,
+    data.jinja_template.configuration,
     terraform_data.mosquitto_password_hasher
   ]
 
@@ -56,15 +80,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "config"
-      value = <<EOT
-        persistence ${var.data_persistence_enabled}
-        persistence_location ${local.persistence_path}
-        log_dest stdout
-        listener ${var.mqtt_port}
-        protocol mqtt
-        listener ${var.websocket_port}
-        protocol websockets
-        EOT
+      value = data.jinja_template.configuration.result
     },
     {
       name  = "persistence.enabled"

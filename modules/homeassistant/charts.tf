@@ -55,7 +55,9 @@ data "jinja_template" "init_script" {
 
 resource "helm_release" "application" {
   depends_on = [
-    data.kubernetes_namespace.namespace
+    data.kubernetes_namespace.namespace,
+    data.jinja_template.configuration,
+    data.jinja_template.init_script
   ]
 
   name       = local.chart_install_name
@@ -248,21 +250,21 @@ resource "helm_release" "application" {
       for k, v in var.ingress_annotations:
       {
         name  = "ingress.annotations.${k}"
-        value = v
+        value = tostring(v)
       }
     ],
     [
       for k, v in var.codeserver_ingress_annotations:
       {
         name  = "addons.codeserver.ingress.annotations.${k}"
-        value = v
+        value = tostring(v)
       }
     ]
   )
   set_list = [
     {
       name  = "configuration.trusted_proxies"
-      value  = var.trusted_proxies
+      value = var.trusted_proxies
     }
   ]
 }
