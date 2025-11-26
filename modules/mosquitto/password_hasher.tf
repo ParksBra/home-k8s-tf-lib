@@ -13,9 +13,9 @@ resource "random_password" "admin_password" {
   min_lower        = floor((local.generated_password_length / 2) / 3)
   min_upper        = ceil((local.generated_password_length / 2) / 3)
   min_numeric      = floor((local.generated_password_length / 2) / 3)
-  keepers          = [
-    local.generated_password_length,
-  ]
+  keepers          = {
+    generated_password_length = local.generated_password_length
+  }
 }
 
 locals {

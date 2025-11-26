@@ -46,7 +46,7 @@ output "codeserver_password" {
 
 output "codeserver_service_address" {
   description = "The address of the Home Assistant code server service."
-  value       = "${helm_release.codeserver.id}-codeserver.${data.kubernetes_namespace.namespace.id}.svc"
+  value       = "${helm_release.application.id}-codeserver.${data.kubernetes_namespace.namespace.id}.svc"
 }
 
 output "codeserver_service_port" {

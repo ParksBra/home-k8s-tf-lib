@@ -13,9 +13,9 @@ resource "random_password" "codeserver_password" {
   min_lower        = floor((local.codeserver_generated_password_length / 2) / 3)
   min_upper        = ceil((local.codeserver_generated_password_length / 2) / 3)
   min_numeric      = floor((local.codeserver_generated_password_length / 2) / 3)
-  keepers          = [
-    local.codeserver_generated_password_length,
-  ]
+  keepers          = {
+    codeserver_generated_password_length = local.codeserver_generated_password_length
+  }
 }
 
 locals {
