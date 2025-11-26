@@ -165,7 +165,7 @@ resource "helm_release" "application" {
       ]
     )
   )
-  set_wo = [
+  set_sensitive = [
     {
       name  = "zigbee2mqtt.mqtt.password"
       value = var.mqtt_broker_password

@@ -144,7 +144,6 @@ variable "admin_password" {
   type        = string
   default     = null
   sensitive   = true
-  ephemeral   = true
 }
 
 variable "mqtt_port" {
