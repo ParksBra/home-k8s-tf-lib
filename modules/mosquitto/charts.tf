@@ -14,13 +14,13 @@ locals {
 
 locals {
   configuration_template_path = "${path.module}/templates/configuration.j2"
-  jinja_context = {
+  jinja_context = jsonencode({
     data_persistence_enabled = var.data_persistence_enabled
     persistence_path         = local.persistence_path
     password_file_path       = local.password_file_path
     mqtt_port                = var.mqtt_port
     websocket_port           = var.websocket_port
-  }
+  })
 }
 
 data "jinja_template" "configuration" {
