@@ -2,6 +2,8 @@ module "zigbee2mqtt" {
   source = "../zigbee2mqtt"
   depends_on = [
     kubernetes_namespace.namespace,
+    module.akri,
+    data.kubernetes_resources.akri_udev_resources,
     module.mosquitto,
     module.storageclass,
     module.cert_manager
@@ -22,5 +24,9 @@ module "zigbee2mqtt" {
   ingress_host_address     = local.zigbee2mqtt_subdomain
   ingress_annotations      = local.environment_ingress_annotations
 
-  zigbee_serial_port       = "/dev/ttyUSB0"
+  pod_additional_resources = length(data.kubernetes_resources.akri_udev_instances.objects) > 0 ? {
+    "${data.kubernetes_resources.akri_udev_instances.objects[0].spec.cdiName}" = "1"
+  } : {}
+
+  zigbee_serial_port       = length(data.kubernetes_resources.akri_udev_instances.objects) > 0 ? data.kubernetes_resources.akri_udev_instances.objects[0].spec.brokerProperties.UDEV_DEVNODE_0 : null
 }

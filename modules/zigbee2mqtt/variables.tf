@@ -191,3 +191,9 @@ variable "pod_cpu_millicores" {
   type        = number
   default     = 200
 }
+
+variable "pod_additional_resources" {
+  description = "A map of additional resource requests and limits for the Zigbee2MQTT pod. Will be added to both limits and requests."
+  type        = map
+  default     = {}
+}

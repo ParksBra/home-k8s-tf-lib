@@ -32,3 +32,8 @@ output "udev_instance_name" {
   description = "The name of the UDEV instance configured in Akri."
   value       = var.udev_instance_name
 }
+
+output "udev_resource_name" {
+  description = "The name of the UDEV resource configured in Akri."
+  value       = "akri.sh/${var.udev_instance_name}"
+}

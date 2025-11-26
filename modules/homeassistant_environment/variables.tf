@@ -107,3 +107,21 @@ variable "zigbee2mqtt_storage_size_gb" {
   type        = number
   default     = 8
 }
+
+variable "akri_udev_subsystem" {
+  description = "The udev subsystem to match for Akri device discovery."
+  type        = string
+  default     = "tty"
+}
+
+variable "akri_zigbee_radio_vendor_id" {
+  description = "The USB vendor ID of the Zigbee radio for Akri device discovery. Default is 'ea60' for Home Assistant Connect ZBT-1."
+  type        = string
+  default     = "ea60"
+}
+
+variable "akri_zigbee_radio_product_id" {
+  description = "The USB product ID of the Zigbee radio for Akri device discovery. Default is '10c4' for Home Assistant Connect ZBT-1."
+  type        = string
+  default     = "10c4"
+}
