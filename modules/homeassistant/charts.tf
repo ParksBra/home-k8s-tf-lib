@@ -88,7 +88,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "persistence.enabled"
-      value = var.data_storage_persistence_enabled
+      value = tostring(var.data_storage_persistence_enabled)
     },
     {
       name  = "persistence.storageClass"
@@ -104,7 +104,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "hostNetwork"
-      value = var.pod_host_network_enabled
+      value = tostring(var.pod_host_network_enabled)
     },
     {
       name  = "dnsPolicy"
@@ -116,11 +116,11 @@ resource "helm_release" "application" {
     },
     {
       name  = "service.port"
-      value = var.service_port
+      value = tostring(var.service_port)
     },
     {
       name  = "ingress.enabled"
-      value = var.ingress_enabled
+      value = tostring(var.ingress_enabled)
     },
     {
       name  = "ingress.className"
@@ -128,7 +128,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "ingress.annotations"
-      value = var.ingress_annotations
+      value = yamlencode(var.ingress_annotations)
     },
     {
       name  = "ingress.hosts[0].host"
@@ -156,7 +156,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "replicaCount"
-      value = 1 # Always 1 for StatefulSet controller type
+      value = tostring(1) # Always 1 for StatefulSet controller type
     },
     {
       name  = "resources.limits.cpu"
@@ -176,7 +176,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "addons.codeserver.enabled"
-      value = var.codeserver_enabled
+      value = tostring(var.codeserver_enabled)
     },
     {
       name  = "addons.codeserver.image.repository"
@@ -192,11 +192,11 @@ resource "helm_release" "application" {
     },
     {
       name  = "addons.codeserver.auth.enabled"
-      value = var.codeserver_auth_enabled
+      value = tostring(var.codeserver_auth_enabled)
     },
     {
       name  = "addons.codeserver.auth.existingSecret"
-      value = var.codeserver_auth_enabled ? kubernetes_secret.codeserver_password_secret[0].id : null
+      value = var.codeserver_auth_enabled ? kubernetes_secret.codeserver_password_secret[0].id : tostring(null)
     },
     {
       name  = "addons.codeserver.service.type"
@@ -204,11 +204,11 @@ resource "helm_release" "application" {
     },
     {
       name  = "addons.codeserver.service.port"
-      value = var.codeserver_service_port
+      value = tostring(var.codeserver_service_port)
     },
     {
       name  = "addons.codeserver.ingress.enabled"
-      value = var.codeserver_ingress_enabled
+      value = tostring(var.codeserver_ingress_enabled)
     },
     {
       name  = "addons.codeserver.ingress.className"
@@ -216,7 +216,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "addons.codeserver.ingress.annotations"
-      value = var.codeserver_ingress_annotations
+      value = yamlencode(var.codeserver_ingress_annotations)
     },
     {
       name  = "addons.codeserver.ingress.hosts[0].host"
@@ -240,11 +240,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "configuration.enabled"
-      value = true
-    },
-    {
-      name  = "configuration.trusted_proxies"
-      value  = var.trusted_proxies
+      value = tostring(true)
     },
     {
       name  = "configuration.templateConfig"
@@ -253,6 +249,12 @@ resource "helm_release" "application" {
     {
       name  = "configuration.initScript"
       value = data.jinja_template.init_script.result
+    }
+  ]
+  set_list = [
+    {
+      name  = "configuration.trusted_proxies"
+      value  = var.trusted_proxies
     }
   ]
 }

@@ -36,7 +36,7 @@ resource "helm_release" "application" {
   set = [
     {
       name  = "replicaCount"
-      value = var.pod_replicas
+      value = tostring(var.pod_replicas)
     },
     {
       name  = "strategyType"
@@ -68,7 +68,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "persistence.enabled"
-      value = var.data_persistence_enabled
+      value = tostring(var.data_persistence_enabled)
     },
     {
       name  = "persistence.storageClass"
@@ -88,7 +88,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "ports.mqtt.port"
-      value = var.mqtt_port
+      value = tostring(var.mqtt_port)
     },
     {
       name  = "ports.mqtt.protocol"
@@ -96,7 +96,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "service.websocket.port"
-      value = var.websocket_port
+      value = tostring(var.websocket_port)
     },
     {
       name  = "service.websocket.protocol"

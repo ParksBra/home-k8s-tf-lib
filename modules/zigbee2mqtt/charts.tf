@@ -91,11 +91,11 @@ resource "helm_release" "application" {
       },
       {
         name  = "zigbee2mqtt.serial.port"
-        value = var.zigbee_serial_port
+        value = tostring(var.zigbee_serial_port)
       },
       {
         name  = "zigbee2mqtt.serial.disable_led"
-        value = var.zigbee_disable_led
+        value = tostring(var.zigbee_disable_led)
       },
       {
         name  = "zigbee2mqtt.serial.adapter"
@@ -103,15 +103,15 @@ resource "helm_release" "application" {
       },
       {
         name  = "zigbee2mqtt.serial.baudrate"
-        value = var.zigbee_baudrate
+        value = tostring(var.zigbee_baudrate)
       },
       {
         name  = "zigbee2mqtt.serial.rtscts"
-        value = var.zigbee_rtscts
+        value = tostring(var.zigbee_rtscts)
       },
       {
         name  = "ingress.enabled"
-        value = var.ingress_enabled
+        value = tostring(var.ingress_enabled)
       },
       {
         name  = "ingress.ingressClassName"
@@ -119,7 +119,7 @@ resource "helm_release" "application" {
       },
       {
         name  = "ingress.annotations"
-        value = var.ingress_annotations
+        value = yamlencode(var.ingress_annotations)
       },
       {
         name  = "ingress.hosts[0].host"
@@ -155,11 +155,11 @@ resource "helm_release" "application" {
         [
           {
             name  = "statefulSet.resources.requests.${k}"
-            value = v
+            value = tostring(v)
           },
           {
             name  = "statefulSet.resources.limits.${k}"
-            value = v
+            value = tostring(v)
           }
         ]
       ]

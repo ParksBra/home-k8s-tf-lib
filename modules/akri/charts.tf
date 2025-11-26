@@ -34,7 +34,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "controller.enabled"
-      value = var.controller_enabled
+      value = tostring(var.controller_enabled)
     },
     {
       name  = "controller.image.repository"
@@ -50,7 +50,7 @@ resource "helm_release" "application" {
     },
     {
       name = "agent.enabled"
-      value = var.agent_enabled
+      value = tostring(var.agent_enabled)
     },
     {
       name  = "agent.image.repository"
@@ -70,7 +70,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "udev.configuration.enabled"
-      value = var.udev_enabled
+      value = tostring(var.udev_enabled)
     },
     {
       name  = "udev.configuration.name"
@@ -78,17 +78,17 @@ resource "helm_release" "application" {
     },
     {
       name  = "udev.configuration.discoveryDetails.groupRecursive"
-      value = var.udev_discovery_group_recursive
+      value = tostring(var.udev_discovery_group_recursive)
     },
     {
       name  = "udev.discovery.enabled"
-      value = var.udev_discovery_enabled
+      value = tostring(var.udev_discovery_enabled)
     }
   ]
   set_list = [
     {
       name  = "udev.configuration.discoveryDetails.udevRules"
-      values = var.udev_discovery_rules_list
+      value = var.udev_discovery_rules_list
     }
   ]
 }

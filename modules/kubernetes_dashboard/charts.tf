@@ -64,7 +64,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "app.ingress.enabled"
-      value = var.ingress_enabled
+      value = tostring(var.ingress_enabled)
     },
     {
       name  = "app.ingress.hosts[0]"
@@ -84,7 +84,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "app.ingress.issuer.name"
-      value = null # Rely on user-provided annotations
+      value = tostring(null) # Rely on user-provided annotations
     },
     {
       name  = "app.ingress.issuer.scope"
@@ -92,19 +92,19 @@ resource "helm_release" "application" {
     },
     {
       name  = "app.ingress.annotations"
-      value = var.ingress_annotations
+      value = yamlencode(var.ingress_annotations)
     },
     {
       name  = "app.ingress.useDefaultIngressClass"
-      value = false # Rely on user-provided ingress class name
+      value = tostring(false) # Rely on user-provided ingress class name
     },
     {
       name  = "app.ingress.useDefaultAnnotations"
-      value = false # Rely on user-provided annotations
+      value = tostring(false) # Rely on user-provided annotations
     },
     {
       name  = "app.ingress.tls.enabled"
-      value = true
+      value = tostring(true)
     },
     {
       name  = "app.ingress.tls.secretName"
