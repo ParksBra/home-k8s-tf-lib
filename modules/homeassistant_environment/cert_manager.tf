@@ -3,9 +3,12 @@ locals {
 }
 
 resource "kubernetes_secret" "cloudflare_api_token" {
+  depends_on = [
+    kubernetes_namespace.namespace
+  ]
   metadata {
     name      = "cloudflare-api-token-secret"
-    namespace = local.environment_namespace
+    namespace = kubernetes_namespace.namespace.id
   }
   data = {
     "${local.cloudflare_secret_key}" = var.cloudflare_api_token
@@ -16,12 +19,14 @@ resource "kubernetes_secret" "cloudflare_api_token" {
 module "cert_manager" {
   source = "terraform-iaac/cert-manager/kubernetes"
   depends_on = [
+    kubernetes_namespace.namespace,
     kubernetes_secret.cloudflare_api_token
   ]
-  namespace_name = local.environment_namespace
-  cluster_issuer_email = local.acme_email
+
+  namespace_name        = kubernetes_namespace.namespace.id
+  cluster_issuer_email  = local.acme_email
   cluster_issuer_create = true
-  solvers = [
+  solvers               = [
     {
       dns01 = {
         cloudflare = {

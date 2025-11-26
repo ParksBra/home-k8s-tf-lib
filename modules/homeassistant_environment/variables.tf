@@ -90,20 +90,20 @@ variable "storage_class_reclaim_policy" {
   default     = "Retain"
 }
 
-variable "homeassistant_storage_size" {
-  description = "The size of the persistent volume for Home Assistant."
-  type        = string
-  default     = "32Gi"
+variable "homeassistant_storage_size_gb" {
+  description = "The size of the persistent volume for Home Assistant in GB."
+  type        = number
+  default     = 32
 }
 
-variable "mosquitto_storage_size" {
-  description = "The size of the persistent volume for Mosquitto."
-  type        = string
-  default     = "8Gi"
+variable "mosquitto_storage_size_gb" {
+  description = "The size of the persistent volume for Mosquitto in GB."
+  type        = number
+  default     = 8
 }
 
-variable "zigbee2mqtt_storage_size" {
-  description = "The size of the persistent volume for Zigbee2MQTT."
-  type        = string
-  default     = "8Gi"
+variable "zigbee2mqtt_storage_size_gb" {
+  description = "The size of the persistent volume for Zigbee2MQTT in GB."
+  type        = number
+  default     = 8
 }
