@@ -12,7 +12,7 @@ module "mosquitto" {
   data_volume_size                = local.mosquitto_storage_size
   data_storage_class_name         = module.storageclass.id
 
-  admin_username                  = "admin"
+  admin_username                  = var.mosquitto_admin_username
   admin_password                  = var.mosquitto_admin_password
 
   service_external_traffic_policy = ""

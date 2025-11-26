@@ -5,7 +5,7 @@ output "namespace_id" {
 
 output "id" {
   description = "The Helm release ID for Mosquitto."
-  value       = helm_release.mosquitto.id
+  value       = helm_release.application.id
 }
 
 output "chart_reference" {
@@ -15,7 +15,17 @@ output "chart_reference" {
 
 output "service_address" {
   description = "The address of the Mosquitto service."
-  value       = "${helm_release.mosquitto.id}.${data.kubernetes_namespace.namespace.id}.svc"
+  value       = "${helm_release.application.id}.${data.kubernetes_namespace.namespace.id}.svc"
+}
+
+output "service_mqtt_port" {
+  description = "The port of the Mosquitto MQTT service."
+  value       = var.mqtt_port
+}
+
+output "service_websocket_port" {
+  description = "The port of the Mosquitto WebSocket service."
+  value       = var.websocket_port
 }
 
 output "mqtt_port" {

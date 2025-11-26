@@ -13,7 +13,7 @@ locals {
   codeserver_tls_secret_name = "${local.chart_install_name}-codeserver-ingress-tls"
 }
 
-resource "helm_release" "home_assistant" {
+resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace
   ]

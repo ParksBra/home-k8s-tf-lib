@@ -12,7 +12,7 @@ locals {
   password_file_path = "/etc/mosquitto/passwordfile"
 }
 
-resource "helm_release" "mosquitto" {
+resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace,
     terraform_data.mosquitto_password_hasher

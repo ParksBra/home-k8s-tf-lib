@@ -1,11 +1,11 @@
 output "namespace" {
   description = "The namespace where Zigbee2MQTT is deployed."
-  value       = local.namespace
+  value       = data.kubernetes_namespace.namespace.id
 }
 
-output "name" {
+output "id" {
   description = "The name used to install the Zigbee2MQTT Helm chart."
-  value       = local.chart_install_name
+  value       = helm_release.application.id
 }
 
 output "chart_reference" {
@@ -15,7 +15,22 @@ output "chart_reference" {
 
 output "service_address" {
   description = "The address of the Zigbee2MQTT service."
-  value       = "${local.chart_install_name}.${local.namespace}.svc"
+  value       = "${helm_release.application.id}.${data.kubernetes_namespace.namespace.id}.svc"
+}
+
+output "service_port" {
+  description = "The port of the Home Assistant service."
+  value       = var.service_port
+}
+
+output "ingress_enabled" {
+  description = "Whether ingress is enabled for the Home Assistant service."
+  value       = var.ingress_enabled
+}
+
+output "ingress_address" {
+  description = "The ingress address of the Home Assistant service."
+  value       = var.ingress_host_address
 }
 
 output "tls_secret_name" {

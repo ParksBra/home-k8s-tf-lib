@@ -7,7 +7,7 @@ locals {
   chart_install_name = var.chart_install_name != null ? var.chart_install_name : local.chart_reference
 }
 
-resource "helm_release" "akri" {
+resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace
   ]

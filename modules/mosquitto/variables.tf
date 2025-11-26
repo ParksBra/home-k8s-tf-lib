@@ -1,10 +1,3 @@
-# Provider vars
-variable "kubeconfig_path" {
-  description = "Path to the kubeconfig file for the target Kubernetes cluster."
-  type        = string
-  default     = "~/.kube/config"
-}
-
 variable "python_executable" {
   description = "The Python executable to use for running the Mosquitto password hasher script. Must have the 'passlib' module installed."
   type        = string

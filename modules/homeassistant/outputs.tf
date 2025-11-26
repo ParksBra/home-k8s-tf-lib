@@ -5,12 +5,27 @@ output "namespace_id" {
 
 output "id" {
   description = "The Helm release ID for Home Assistant."
-  value       = helm_release.home_assistant.id
+  value       = helm_release.application.id
 }
 
 output "service_address" {
   description = "The address of the Home Assistant service."
-  value       = "${helm_release.home_assistant.id}.${data.kubernetes_namespace.namespace.id}.svc"
+  value       = "${helm_release.application.id}.${data.kubernetes_namespace.namespace.id}.svc"
+}
+
+output "service_port" {
+  description = "The port of the Home Assistant service."
+  value       = var.service_port
+}
+
+output "ingress_enabled" {
+  description = "Whether ingress is enabled for the Home Assistant service."
+  value       = var.ingress_enabled
+}
+
+output "ingress_address" {
+  description = "The ingress address of the Home Assistant service."
+  value       = var.ingress_host_address
 }
 
 output "codeserver_enabled" {
@@ -32,4 +47,19 @@ output "codeserver_password" {
 output "codeserver_service_address" {
   description = "The address of the Home Assistant code server service."
   value       = "${helm_release.codeserver.id}-codeserver.${data.kubernetes_namespace.namespace.id}.svc"
+}
+
+output "codeserver_service_port" {
+  description = "The port of the Home Assistant code server service."
+  value       = var.codeserver_service_port
+}
+
+output "codeserver_ingress_enabled" {
+  description = "Whether ingress is enabled for the Home Assistant code server."
+  value       = var.codeserver_ingress_enabled
+}
+
+output "codeserver_ingress_address" {
+  description = "The ingress address of the Home Assistant code server."
+  value       = var.codeserver_ingress_host_address
 }

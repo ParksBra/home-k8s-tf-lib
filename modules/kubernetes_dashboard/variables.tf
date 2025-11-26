@@ -1,10 +1,3 @@
-# Provider vars
-variable "kubeconfig_path" {
-  description = "Path to the kubeconfig file for the target Kubernetes cluster."
-  type        = string
-  default     = "~/.kube/config"
-}
-
 # Chart vars
 variable "namespace" {
   description = "The namespace in which to deploy the Helm chart."

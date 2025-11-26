@@ -1,3 +1,7 @@
-provider "kubernetes" {
-  config_path = var.kubeconfig_path
+terraform {
+  required_providers {
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+    }
+  }
 }

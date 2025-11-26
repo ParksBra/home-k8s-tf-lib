@@ -5,8 +5,6 @@ module "homeassistant" {
     module.cert_manager
   ]
 
-  kubeconfig_path = local.kubeconfig_path
-
   namespace                        = kubernetes_namespace.namespace.id
 
   ingress_enabled                  = true
@@ -18,7 +16,7 @@ module "homeassistant" {
   pod_dns_policy                   = "ClusterFirstWithHostNet"
 
   data_storage_persistence_enabled = true
-  data_volume_size                 = "32Gi"
+  data_volume_size                 = local.homeassistant_storage_size
   data_storage_class_name          = module.storageclass.id
 
   codeserver_enabled               = true

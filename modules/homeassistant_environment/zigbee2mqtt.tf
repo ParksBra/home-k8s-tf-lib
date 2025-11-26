@@ -6,8 +6,6 @@ module "zigbee2mqtt" {
     module.cert_manager
   ]
 
-  kubeconfig_path = local.kubeconfig_path
-
   namespace = kubernetes_namespace.namespace.id
 
   mqtt_broker_address = "mqtt://${module.mosquitto.service_fqdn}:${module.mosquitto.service_port}"

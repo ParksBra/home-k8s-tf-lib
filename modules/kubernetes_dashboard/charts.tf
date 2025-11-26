@@ -11,7 +11,7 @@ locals {
   tls_secret_name = "${local.chart_install_name}-ingress-tls"
 }
 
-resource "helm_release" "kubernetes_dashboard" {
+resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace
   ]

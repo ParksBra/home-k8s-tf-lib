@@ -5,7 +5,7 @@ output "namespace_id" {
 
 output "id" {
   description = "The Helm release ID for Akri."
-  value       = helm_release.akri.id
+  value       = helm_release.application.id
 }
 
 output "chart_reference" {

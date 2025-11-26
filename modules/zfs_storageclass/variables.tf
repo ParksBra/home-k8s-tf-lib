@@ -1,9 +1,3 @@
-# Provider vars
-variable "kubeconfig_path" {
-  description = "Path to the kubeconfig file for the target Kubernetes cluster."
-  type        = string
-}
-
 # StorageClass vars
 variable "name" {
   description = "The name of the ZFS StorageClass. If null, a default name will be generated."

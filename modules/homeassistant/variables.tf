@@ -1,9 +1,3 @@
-# Provider vars
-variable "kubeconfig_path" {
-  description = "Path to the kubeconfig file for the target Kubernetes cluster."
-  type        = string
-  default     = "~/.kube/config"
-}
 # Chart vars
 variable "namespace" {
   description = "The namespace in which to deploy the Helm chart."
@@ -66,12 +60,6 @@ variable "chart_cleanup_on_fail" {
 }
 
 # Home Assistant vars
-variable "namespace" {
-  description = "The Kubernetes namespace in which to deploy Home Assistant."
-  type        = string
-  default     = "home-assistant"
-}
-
 variable "image_repository" {
   description = "The Docker image repository for Home Assistant."
   type        = string
@@ -168,13 +156,7 @@ variable "pod_update_strategy" {
   default     = "RollingUpdate"
 }
 
-
-
-
-
-
-
-
+# Home Assistant Code Server add-on vars
 variable "codeserver_enabled" {
   description = "Whether to enable the Home Assistant Code Server add-on."
   type        = bool
