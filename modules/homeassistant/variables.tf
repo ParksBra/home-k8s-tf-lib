@@ -90,10 +90,10 @@ variable "data_storage_class_name" {
   default     = "standard"
 }
 
-variable "data_volume_size" {
-  description = "The size of the persistent volume for Home Assistant data."
-  type        = string
-  default     = "8Gi"
+variable "data_volume_size_gb" {
+  description = "The size of the persistent volume for Home Assistant data in GB."
+  type        = number
+  default     = 8
 }
 
 variable "data_storage_access_mode" {
@@ -154,6 +154,18 @@ variable "pod_update_strategy" {
   description = "The pod update strategy for Home Assistant."
   type        = string
   default     = "RollingUpdate"
+}
+
+variable "pod_memory_mb" {
+  description = "The memory request for the Home Assistant pod in MB."
+  type        = number
+  default     = 1024
+}
+
+variable "pod_cpu_millicores" {
+  description = "The CPU request for the Home Assistant pod in millicores."
+  type        = number
+  default     = 1000
 }
 
 # Home Assistant configuration vars

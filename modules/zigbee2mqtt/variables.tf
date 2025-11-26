@@ -138,6 +138,30 @@ variable "zigbee_serial_port" {
   default     = null
 }
 
+variable "zigbee_adapter_type" {
+  description = "The type of Zigbee adapter to use."
+  type        = string
+  default     = null
+}
+
+variable "zigbee_disable_led" {
+  description = "Whether to disable the LED on the Zigbee adapter."
+  type        = bool
+  default     = false
+}
+
+variable "zigbee_baudrate" {
+  description = "The baudrate for the Zigbee adapter."
+  type        = number
+  default     = 115200
+}
+
+variable "zigbee_rtscts" {
+  description = "Whether to enable RTS/CTS flow control for the Zigbee adapter."
+  type        = bool
+  default     = false
+}
+
 variable "data_persistence_enabled" {
   description = "Whether to enable data persistence for Zigbee2MQTT."
   type        = bool
@@ -150,8 +174,20 @@ variable "data_storage_class_name" {
   default     = "standard"
 }
 
-variable "data_volume_size" {
-  description = "The size of the persistent volume for Zigbee2MQTT data."
-  type        = string
-  default     = "1Gi"
+variable "data_volume_size_gb" {
+  description = "The size of the persistent volume for Zigbee2MQTT data in GB."
+  type        = number
+  default     = 1
+}
+
+variable "pod_memory_mb" {
+  description = "The memory request for the Zigbee2MQTT pod in MB."
+  type        = number
+  default     = 600
+}
+
+variable "pod_cpu_millicores" {
+  description = "The CPU request for the Zigbee2MQTT pod in millicores."
+  type        = number
+  default     = 200
 }

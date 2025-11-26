@@ -58,11 +58,27 @@ resource "helm_release" "application" {
     },
     {
       name  = "statefulSet.storage.size"
-      value = var.data_volume_size
+      value = "${var.data_volume_size_gb}Gi"
     },
     {
       name  = "statefulSet.storage.storageClassName"
       value = var.data_storage_class_name
+    },
+    {
+      name  = "statefulSet.resources.limits.cpu"
+      value = "${var.pod_cpu_millicores}m"
+    },
+    {
+      name  = "statefulSet.resources.limits.memory"
+      value = "${var.pod_memory_mb}Mi"
+    },
+    {
+      name  = "statefulSet.resources.requests.cpu"
+      value = "${var.pod_cpu_millicores}m"
+    },
+    {
+      name  = "statefulSet.resources.requests.memory"
+      value = "${var.pod_memory_mb}Mi"
     },
     {
       name  = "zigbee2mqtt.mqtt.server"
@@ -75,6 +91,22 @@ resource "helm_release" "application" {
     {
       name  = "zigbee2mqtt.serial.port"
       value = var.zigbee_serial_port
+    },
+    {
+      name  = "zigbee2mqtt.serial.disable_led"
+      value = var.zigbee_disable_led
+    },
+    {
+      name  = "zigbee2mqtt.serial.adapter"
+      value = var.zigbee_adapter_type
+    },
+    {
+      name  = "zigbee2mqtt.serial.baudrate"
+      value = var.zigbee_baudrate
+    },
+    {
+      name  = "zigbee2mqtt.serial.rtscts"
+      value = var.zigbee_rtscts
     },
     {
       name  = "ingress.enabled"

@@ -96,7 +96,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "persistence.size"
-      value = var.data_volume_size
+      value = "${var.data_volume_size_gb}Gi"
     },
     {
       name  = "controller.type"
@@ -157,6 +157,22 @@ resource "helm_release" "application" {
     {
       name  = "replicaCount"
       value = 1 # Always 1 for StatefulSet controller type
+    },
+    {
+      name  = "resources.limits.cpu"
+      value = "${var.pod_cpu_millicores}m"
+    },
+    {
+      name  = "resources.limits.memory"
+      value = "${var.pod_memory_mb}Mi"
+    },
+    {
+      name  = "resources.requests.cpu"
+      value = "${var.pod_cpu_millicores}m"
+    },
+    {
+      name  = "resources.requests.memory"
+      value = "${var.pod_memory_mb}Mi"
     },
     {
       name  = "addons.codeserver.enabled"

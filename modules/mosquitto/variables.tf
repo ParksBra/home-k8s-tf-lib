@@ -97,6 +97,18 @@ variable "pod_update_strategy" {
   default     = "Recreate"
 }
 
+variable "pod_memory_mb" {
+  description = "The memory request for the Mosquitto pod in MB."
+  type        = number
+  default     = 128
+}
+
+variable "pod_cpu_millicores" {
+  description = "The CPU request for the Mosquitto pod in millicores."
+  type        = number
+  default     = 100
+}
+
 variable "data_persistence_enabled" {
   description = "Whether to enable data persistence for Mosquitto."
   type        = bool
@@ -115,10 +127,10 @@ variable "data_volume_access_mode" {
   default     = "ReadWriteOnce"
 }
 
-variable "data_volume_size" {
-  description = "The size of the persistent volume for Mosquitto data."
-  type        = string
-  default     = "8Gi"
+variable "data_volume_size_gb" {
+  description = "The size of the persistent volume for Mosquitto data in GB."
+  type        = number
+  default     = 8
 }
 
 variable "admin_username" {
