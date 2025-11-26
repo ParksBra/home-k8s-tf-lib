@@ -3,7 +3,7 @@ module "zigbee2mqtt" {
   depends_on = [
     kubernetes_namespace.namespace,
     module.akri,
-    data.kubernetes_resources.akri_udev_resources,
+    data.kubernetes_resources.akri_udev_instances,
     module.mosquitto,
     module.storageclass,
     module.cert_manager
