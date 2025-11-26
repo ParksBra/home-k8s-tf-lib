@@ -51,11 +51,11 @@ resource "helm_release" "application" {
       },
       {
         name  = "service.port"
-        value = var.service_port
+        value = tostring(var.service_port)
       },
       {
         name  = "statefulSet.storage.enabled"
-        value = var.data_persistence_enabled
+        value = tostring(var.data_persistence_enabled)
       },
       {
         name  = "statefulSet.storage.size"
@@ -164,7 +164,7 @@ resource "helm_release" "application" {
       for k, v in var.ingress_annotations:
       {
         name  = "ingress.annotations.${k}"
-        value = v
+        value = tostring(v)
       }
     ]
   )
