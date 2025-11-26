@@ -302,4 +302,5 @@ variable "codeserver_password" {
   type        = string
   default     = null
   sensitive   = true
+  ephemeral   = true
 }
