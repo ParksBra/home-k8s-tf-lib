@@ -42,6 +42,7 @@ output "mosquitto_admin_password" {
   description = "The admin password for the Mosquitto service."
   value       = module.mosquitto.admin_password
   sensitive   = true
+  ephemeral   = true
 }
 
 output "zigbee2mqtt_service_address" {

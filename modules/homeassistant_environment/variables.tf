@@ -25,6 +25,8 @@ variable "ingress_annotations" {
 variable "cloudflare_api_token" {
   description = "The Cloudflare API token for DNS01 challenge solving."
   type        = string
+  sensitive   = true
+  ephemeral   = true
 }
 
 variable "mosquitto_admin_username" {
@@ -37,6 +39,7 @@ variable "mosquitto_admin_password" {
   description = "The admin password for the Mosquitto MQTT broker."
   type        = string
   sensitive   = true
+  ephemeral   = true
 }
 
 variable "acme_email" {

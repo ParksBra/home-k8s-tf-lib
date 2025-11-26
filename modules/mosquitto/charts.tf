@@ -119,7 +119,7 @@ resource "helm_release" "application" {
       value = "${var.pod_memory_mb}Mi"
     }
   ]
-  set_sensitive = [
+  set_wo = [
     {
       name  = "authentication.passwordEntries"
       value = "${var.admin_username}:${terraform_data.mosquitto_password_hasher.output}"

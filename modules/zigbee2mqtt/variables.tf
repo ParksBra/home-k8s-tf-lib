@@ -130,6 +130,7 @@ variable "mqtt_broker_password" {
   type        = string
   default     = null
   sensitive   = true
+  ephemeral   = true
 }
 
 variable "zigbee_serial_port" {

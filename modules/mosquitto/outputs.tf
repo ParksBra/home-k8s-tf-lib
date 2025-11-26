@@ -47,4 +47,5 @@ output "admin_password" {
   description = "The admin password for Mosquitto."
   value       = var.admin_password
   sensitive   = true
+  ephemeral   = true
 }

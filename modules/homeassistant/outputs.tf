@@ -42,6 +42,7 @@ output "codeserver_password" {
   description = "The password for the Home Assistant code server."
   value       = local.codeserver_password
   sensitive   = true
+  ephemeral   = true
 }
 
 output "codeserver_service_address" {
