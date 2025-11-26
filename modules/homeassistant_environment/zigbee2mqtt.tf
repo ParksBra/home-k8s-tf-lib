@@ -1,3 +1,7 @@
+locals {
+  mosquitto_mqtt_broker_address = "mqtt://${module.mosquitto.service_address}:${module.mosquitto.service_mqtt_port}"
+}
+
 module "zigbee2mqtt" {
   source = "../zigbee2mqtt"
   depends_on = [
@@ -11,7 +15,7 @@ module "zigbee2mqtt" {
 
   namespace                = kubernetes_namespace.namespace.id
 
-  mqtt_broker_address      = "mqtt://${module.mosquitto.service_fqdn}:${module.mosquitto.service_port}"
+  mqtt_broker_address      = local.mosquitto_mqtt_broker_address
   mqtt_broker_username     = module.mosquitto.admin_username
   mqtt_broker_password     = module.mosquitto.admin_password
 
