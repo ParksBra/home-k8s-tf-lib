@@ -118,10 +118,6 @@ resource "helm_release" "application" {
         value = var.ingress_class_name
       },
       {
-        name  = "ingress.annotations"
-        value = yamlencode(var.ingress_annotations)
-      },
-      {
         name  = "ingress.hosts[0].host"
         value = var.ingress_host_address
       },
@@ -163,7 +159,14 @@ resource "helm_release" "application" {
           }
         ]
       ]
-    )
+    ),
+    [
+      for k, v in var.ingress_annotations:
+      {
+        name  = "ingress.annotations.${k}"
+        value = v
+      }
+    ]
   )
   set_sensitive = [
     {

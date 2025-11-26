@@ -29,86 +29,91 @@ resource "helm_release" "application" {
   replace = var.chart_replace
   cleanup_on_fail = var.chart_cleanup_on_fail
 
-  set = [
-    {
-      name  = "api.image.repository"
-      value = var.api_image_repository
-    },
-    {
-      name  = "api.image.tag"
-      value = var.api_image_tag
-    },
-    {
-      name  = "web.image.repository"
-      value = var.web_image_repository
-    },
-    {
-      name  = "web.image.tag"
-      value = var.web_image_tag
-    },
-    {
-      name  = "auth.image.repository"
-      value = var.auth_image_repository
-    },
-    {
-      name  = "auth.image.tag"
-      value = var.auth_image_tag
-    },
-    {
-      name  = "app.image.pullPolicy"
-      value = var.image_pull_policy
-    },
-    {
-      name  = "app.mode"
-      value = var.api_only ? "api" : "dashboard"
-    },
-    {
-      name  = "app.ingress.enabled"
-      value = tostring(var.ingress_enabled)
-    },
-    {
-      name  = "app.ingress.hosts[0]"
-      value = var.ingress_host_address
-    },
-    {
-      name  = "app.ingress.ingressClassName"
-      value = var.ingress_class_name
-    },
-    {
-      name  = "app.ingress.path"
-      value = "/"
-    },
-    {
-      name  = "app.ingress.pathType"
-      value = "ImplementationSpecific"
-    },
-    {
-      name  = "app.ingress.issuer.name"
-      value = tostring(null) # Rely on user-provided annotations
-    },
-    {
-      name  = "app.ingress.issuer.scope"
-      value = "disabled" # Rely on user-provided annotations
-    },
-    {
-      name  = "app.ingress.annotations"
-      value = yamlencode(var.ingress_annotations)
-    },
-    {
-      name  = "app.ingress.useDefaultIngressClass"
-      value = tostring(false) # Rely on user-provided ingress class name
-    },
-    {
-      name  = "app.ingress.useDefaultAnnotations"
-      value = tostring(false) # Rely on user-provided annotations
-    },
-    {
-      name  = "app.ingress.tls.enabled"
-      value = tostring(true)
-    },
-    {
-      name  = "app.ingress.tls.secretName"
-      value = local.tls_secret_name
-    },
-  ]
+  set = concat(
+    [
+      {
+        name  = "api.image.repository"
+        value = var.api_image_repository
+      },
+      {
+        name  = "api.image.tag"
+        value = var.api_image_tag
+      },
+      {
+        name  = "web.image.repository"
+        value = var.web_image_repository
+      },
+      {
+        name  = "web.image.tag"
+        value = var.web_image_tag
+      },
+      {
+        name  = "auth.image.repository"
+        value = var.auth_image_repository
+      },
+      {
+        name  = "auth.image.tag"
+        value = var.auth_image_tag
+      },
+      {
+        name  = "app.image.pullPolicy"
+        value = var.image_pull_policy
+      },
+      {
+        name  = "app.mode"
+        value = var.api_only ? "api" : "dashboard"
+      },
+      {
+        name  = "app.ingress.enabled"
+        value = tostring(var.ingress_enabled)
+      },
+      {
+        name  = "app.ingress.hosts[0]"
+        value = var.ingress_host_address
+      },
+      {
+        name  = "app.ingress.ingressClassName"
+        value = var.ingress_class_name
+      },
+      {
+        name  = "app.ingress.path"
+        value = "/"
+      },
+      {
+        name  = "app.ingress.pathType"
+        value = "ImplementationSpecific"
+      },
+      {
+        name  = "app.ingress.issuer.name"
+        value = tostring(null) # Rely on user-provided annotations
+      },
+      {
+        name  = "app.ingress.issuer.scope"
+        value = "disabled" # Rely on user-provided annotations
+      },
+      {
+        name  = "app.ingress.useDefaultIngressClass"
+        value = tostring(false) # Rely on user-provided ingress class name
+      },
+      {
+        name  = "app.ingress.useDefaultAnnotations"
+        value = tostring(false) # Rely on user-provided annotations
+      },
+      {
+        name  = "app.ingress.tls.enabled"
+        value = tostring(true)
+      },
+      {
+        name  = "app.ingress.tls.secretName"
+        value = local.tls_secret_name
+      },
+    ],
+    [
+        for k, v in var.ingress_annotations:
+        {
+          name  = "app.ingress.annotations.${k}"
+          value = v
+        }
+    ]
+  )
 }
