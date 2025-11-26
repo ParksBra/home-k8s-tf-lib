@@ -1,0 +1,30 @@
+module "homeassistant" {
+  source = "../homeassistant"
+  depends_on = [
+    module.storageclass,
+    module.cert_manager
+  ]
+
+  kubeconfig_path = local.kubeconfig_path
+
+  namespace                        = kubernetes_namespace.namespace.id
+
+  ingress_enabled                  = true
+  ingress_class_name               = local.environment_ingress_class_name
+  ingress_host_address             = local.homeassistant_subdomain
+  ingress_annotations              = local.environment_ingress_annotations
+
+  pod_host_network_enabled         = true
+  pod_dns_policy                   = "ClusterFirstWithHostNet"
+
+  data_storage_persistence_enabled = true
+  data_volume_size                 = "32Gi"
+  data_storage_class_name          = module.storageclass.id
+
+  codeserver_enabled               = true
+  codeserver_auth_enabled          = true
+  codeserver_ingress_enabled       = true
+  codeserver_ingress_host_address  = local.homeassistant_codeserver_subdomain
+  codeserver_ingress_class_name    = local.environment_ingress_class_name
+  codeserver_ingress_annotations   = local.environment_ingress_annotations
+}
