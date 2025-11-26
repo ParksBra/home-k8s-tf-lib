@@ -1,3 +1,4 @@
+# Python executable for password hasher
 variable "python_executable" {
   description = "The Python executable to use for running the Mosquitto password hasher script. Must have the 'passlib' module installed."
   type        = string

@@ -1,4 +1,5 @@
 module "storageclass" {
+  count = var.enable_persistent_storage ? 1 : 0
   source = "../zfs_storageclass"
 
   name = "${kubernetes_namespace.namespace.id}-sc"

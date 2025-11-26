@@ -12,6 +12,10 @@ module "zigbee2mqtt" {
   mqtt_broker_username = module.mosquitto.admin_username
   mqtt_broker_password = module.mosquitto.admin_password
 
+  data_persistence_enabled = var.enable_persistent_storage
+  data_volume_size = local.zigbee2mqtt_storage_size
+  data_storage_class_name = var.enable_persistent_storage ? module.storageclass[0].id : ""
+
   ingress_enabled = true
   ingress_class_name = local.environment_ingress_class_name
   ingress_host_address = local.zigbee2mqtt_subdomain

@@ -4,6 +4,12 @@ variable "namespace" {
   default     = "homeassistant"
 }
 
+variable "python_executable" {
+  description = "The Python executable to use for running the Mosquitto password hasher script. Must have the 'passlib' module installed."
+  type        = string
+  default     = "python3"
+}
+
 variable "ingress_class_name" {
   description = "The ingress class name to use for the Home Assistant environment."
   type        = string
@@ -70,6 +76,12 @@ variable "zfs_pool_name" {
   description = "The name of the ZFS pool to use for storage."
   type        = string
   default     = "zfspv-pool"
+}
+
+variable "enable_persistent_storage" {
+  description = "Whether to enable persistent storage for the Home Assistant environment."
+  type        = bool
+  default     = true
 }
 
 variable "storage_class_reclaim_policy" {

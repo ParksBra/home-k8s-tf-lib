@@ -13,6 +13,46 @@ locals {
   codeserver_tls_secret_name = "${local.chart_install_name}-codeserver-ingress-tls"
 }
 
+locals {
+  configuration_template_path = "${path.module}/templates/configuration.yaml.j2"
+  init_script_template_path   = "${path.module}/templates/init_script.sh.j2"
+  jinja_context = jsonencode({
+    logging_level             = var.logging_level
+    max_configuration_backups = var.max_configuration_backups
+    included_configurations   = var.included_configurations
+    trusted_proxies           = var.trusted_proxies
+    ip_ban_enabled            = var.ip_ban_enabled
+    ip_ban_threshold          = var.ip_ban_threshold
+    use_x_forwarded_for       = var.use_x_forwarded_for
+    enable_my_ha              = var.enable_my_ha
+    enable_mobile_app         = var.enable_mobile_app
+  })
+}
+
+data "jinja_template" "configuration" {
+  context {
+    type = "json"
+    data = local.jinja_context
+  }
+
+  source {
+    directory = dirname(local.configuration_template_path)
+    file      = file(local.configuration_template_path)
+  }
+}
+
+data "jinja_template" "init_script" {
+  context {
+    type = "json"
+    data = local.jinja_context
+  }
+
+  source {
+    directory = dirname(local.init_script_template_path)
+    file      = file(local.init_script_template_path)
+  }
+}
+
 resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace
@@ -45,14 +85,6 @@ resource "helm_release" "application" {
     {
       name  = "image.pullPolicy"
       value = var.image_pull_policy
-    },
-    {
-      name  = "service.type"
-      value = var.service_type
-    },
-    {
-      name  = "service.port"
-      value = var.service_port
     },
     {
       name  = "persistence.enabled"
@@ -190,5 +222,21 @@ resource "helm_release" "application" {
       name  = "addons.codeserver.ingress.tls[0].hosts[0]"
       value = var.codeserver_ingress_host_address
     },
+    {
+      name  = "configuration.enabled"
+      value = true
+    },
+    {
+      name  = "configuration.trusted_proxies"
+      value  = var.trusted_proxies
+    },
+    {
+      name  = "configuration.templateConfig"
+      value = data.jinja_template.configuration.result
+    },
+    {
+      name  = "configuration.initScript"
+      value = data.jinja_template.init_script.result
+    }
   ]
 }

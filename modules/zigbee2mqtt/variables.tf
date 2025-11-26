@@ -137,3 +137,21 @@ variable "zigbee_serial_port" {
   type        = string
   default     = null
 }
+
+variable "data_persistence_enabled" {
+  description = "Whether to enable data persistence for Zigbee2MQTT."
+  type        = bool
+  default     = true
+}
+
+variable "data_storage_class_name" {
+  description = "The storage class name for Zigbee2MQTT persistent volume."
+  type        = string
+  default     = "standard"
+}
+
+variable "data_volume_size" {
+  description = "The size of the persistent volume for Zigbee2MQTT data."
+  type        = string
+  default     = "1Gi"
+}

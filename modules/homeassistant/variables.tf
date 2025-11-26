@@ -156,6 +156,68 @@ variable "pod_update_strategy" {
   default     = "RollingUpdate"
 }
 
+# Home Assistant configuration vars
+variable "logging_level" {
+  description = "The logging level for Home Assistant."
+  type        = string
+  default     = "info"
+}
+
+variable "ip_ban_enabled" {
+  description = "Whether to enable IP banning in Home Assistant."
+  type        = bool
+  default     = true
+}
+
+variable "ip_ban_threshold" {
+  description = "The number of failed login attempts before an IP is banned."
+  type        = number
+  default     = 8
+}
+
+variable "use_x_forwarded_for" {
+  description = "Whether to use the X-Forwarded-For header for client IP addresses."
+  type        = bool
+  default     = true
+}
+
+variable "trusted_proxies" {
+  description = "A list of trusted proxy IP addresses for Home Assistant."
+  type        = list
+  default     = [
+    "127.0.0.0/8"
+  ]
+}
+
+variable "enable_my_ha" {
+  description = "Whether to enable the My Home Assistant integration."
+  type        = bool
+  default     = false
+}
+
+variable "enable_mobile_app" {
+  description = "Whether to enable the Mobile App integration."
+  type        = bool
+  default     = false
+}
+
+variable "included_configurations" {
+  description = "A list of additional configurations (singular reference names, e.g., automation, script) to include in Home Assistant."
+  type        = list
+  default     = [
+    "automation",
+    "script",
+    "scene",
+    "group"
+  ]
+}
+
+variable "max_configuration_backups" {
+  description = "The maximum number of configuration backup files to keep."
+  type        = number
+  default     = 10
+}
+
 # Home Assistant Code Server add-on vars
 variable "codeserver_enabled" {
   description = "Whether to enable the Home Assistant Code Server add-on."

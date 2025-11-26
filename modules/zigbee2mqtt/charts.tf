@@ -53,6 +53,18 @@ resource "helm_release" "application" {
       value = var.service_port
     },
     {
+      name  = "statefulSet.storage.enabled"
+      value = var.data_persistence_enabled
+    },
+    {
+      name  = "statefulSet.storage.size"
+      value = var.data_volume_size
+    },
+    {
+      name  = "statefulSet.storage.storageClassName"
+      value = var.data_storage_class_name
+    },
+    {
       name  = "zigbee2mqtt.mqtt.server"
       value = var.mqtt_broker_address
     },
