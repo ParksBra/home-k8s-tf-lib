@@ -244,10 +244,7 @@ resource "helm_release" "application" {
       },
       {
         name  = "configuration.initScript"
-        value = yamlencode(<<-EOF
-${data.jinja_template.init_script.result}
-EOF
-        )
+        value = replace(data.jinja_template.init_script.result, "\"", "\\\"")
       }
     ],
     [
