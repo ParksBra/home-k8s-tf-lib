@@ -3,7 +3,7 @@ locals {
 }
 
 # We want to wait for auto-discovery to have a chance to create the Akri instances
-resource "wait_for" "akri_resources_creation" {
+resource "time_sleep" "akri_resources_creation" {
   count = var.enable_creation_wait ? 1 : 0
 
   depends_on = [
