@@ -26,6 +26,7 @@ locals {
     use_x_forwarded_for       = var.use_x_forwarded_for
     enable_my_ha              = var.enable_my_ha
     enable_mobile_app         = var.enable_mobile_app
+    force_configuration_init  = var.force_configuration_init
   })
 }
 
@@ -243,9 +244,10 @@ resource "helm_release" "application" {
       },
       {
         name  = "configuration.initScript"
-        value = <<EOF
-${replace(data.jinja_template.init_script.result, "\"", "\\\"")}
+        value = yamlencode(<<-EOF
+${data.jinja_template.init_script.result}
 EOF
+        )
       }
     ],
     [
