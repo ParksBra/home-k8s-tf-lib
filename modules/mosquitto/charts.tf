@@ -80,7 +80,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "config"
-      value = "|\n${data.jinja_template.configuration.result}"
+      value = data.jinja_template.configuration.result
     },
     {
       name  = "persistence.enabled"
