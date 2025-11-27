@@ -22,11 +22,6 @@ variable "ingress_annotations" {
   default     = {}
 }
 
-variable "cloudflare_api_token" {
-  description = "The Cloudflare API token for DNS01 challenge solving."
-  type        = string
-}
-
 variable "mosquitto_admin_username" {
   description = "The admin username for the Mosquitto MQTT broker."
   type        = string
@@ -37,16 +32,6 @@ variable "mosquitto_admin_password" {
   description = "The admin password for the Mosquitto MQTT broker."
   type        = string
   sensitive   = true
-}
-
-variable "acme_email" {
-  description = "The email address to use for ACME certificate registration."
-  type        = string
-}
-
-variable "cloudflare_email" {
-  description = "The email address associated with the Cloudflare account."
-  type        = string
 }
 
 variable "parent_domain" {
