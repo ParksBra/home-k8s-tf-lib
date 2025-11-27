@@ -1,6 +1,7 @@
 #pylint: skip-file
 # Based on: https://shantanoo-desai.github.io/posts/technology/mosquitto_ansible_passgen
 import sys
+import json
 import passlib.hash
 
 SALT_SIZE = 12
@@ -31,7 +32,9 @@ def main():
 
     unhashed_password = sys.argv[1]
 
-    print(mosquitto_passwd(unhashed_password), file=sys.stdout, end="")
+    json_output = json.dumps({"hashed_password": mosquitto_passwd(unhashed_password)})
+
+    print(json_output, file=sys.stdout, end="")
 
 if __name__ == "__main__":
     main()
