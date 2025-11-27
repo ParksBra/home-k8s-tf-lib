@@ -64,6 +64,10 @@ resource "helm_release" "application" {
         value = var.api_only ? "api" : "dashboard"
       },
       {
+        name  = "app.hosts[0]"
+        value = var.ingress_host_address
+      },
+      {
         name  = "app.ingress.enabled"
         value = tostring(var.ingress_enabled)
       },
