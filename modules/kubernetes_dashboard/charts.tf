@@ -109,11 +109,11 @@ resource "helm_release" "application" {
       },
     ],
     [
-        for k, v in var.ingress_annotations:
-        {
-          name  = "app.ingress.annotations.${replace(k, ".", "\\.")}"
-          value = v
-        }
+      for k, v in var.ingress_annotations:
+      {
+        name  = "app.ingress.annotations.${replace(k, ".", "\\.")}"
+        value = v
+      }
     ]
   )
 }
