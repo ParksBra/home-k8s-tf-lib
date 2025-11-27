@@ -244,7 +244,7 @@ resource "helm_release" "application" {
       {
         name  = "configuration.initScript"
         value = <<EOF
-${data.jinja_template.init_script.result}
+${replace(data.jinja_template.init_script.result, "\"", "\\\"")}
 EOF
       }
     ],
