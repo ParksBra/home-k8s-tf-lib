@@ -33,7 +33,7 @@ module "cert_manager" {
         cloudflare = {
           email = local.cloudflare_email
           apiTokenSecretRef = {
-            name = kubernetes_secret.cloudflare_api_token.id
+            name = kubernetes_secret.cloudflare_api_token.metadata[0].name
             key  = local.cloudflare_secret_key
           }
         }
