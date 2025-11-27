@@ -146,7 +146,7 @@ resource "helm_release" "application" {
   set_sensitive = [
     {
       name  = "authentication.passwordEntries"
-      value = "${var.admin_username}:${terraform_data.mosquitto_password_hasher.output}"
+      value = "${var.admin_username}:${data.external.mosquitto_password_hasher.result}"
     }
   ]
 }

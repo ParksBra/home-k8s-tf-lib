@@ -22,15 +22,6 @@ locals {
   admin_password = var.admin_password != null ? var.admin_password : random_password.admin_password[0].result
 }
 
-resource "terraform_data" "mosquitto_password_hasher" {
-  input = var.admin_password
-
-  triggers_replace = [
-    var.admin_password
-  ]
-
-  provisioner "local-exec" {
-    command = "${var.python_executable} mosquitto_password_hasher.py ${local.admin_password}"
-    working_dir = "${path.module}/scripts"
-  }
+data "external" "mosquitto_password_hasher" {
+  program = ["${var.python_executable}", "${path.module}/scripts/mosquitto_password_hasher.py", local.admin_password]
 }
