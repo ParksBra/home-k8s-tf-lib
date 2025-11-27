@@ -2,8 +2,7 @@ module "homeassistant" {
   source = "../homeassistant"
   depends_on = [
     kubernetes_namespace.namespace,
-    module.storageclass,
-    module.cert_manager
+    module.storageclass
   ]
 
   chart_cleanup_on_fail            = var.chart_cleanup_on_fail
