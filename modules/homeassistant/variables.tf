@@ -224,6 +224,12 @@ variable "included_configurations" {
   ]
 }
 
+variable "force_configuration_init" {
+  description = "Whether to force re-initialization of the Home Assistant configuration on startup. This will overwrite the existing configuration, updating it with the current settings."
+  type        = bool
+  default     = false
+}
+
 variable "max_configuration_backups" {
   description = "The maximum number of configuration backup files to keep."
   type        = number
