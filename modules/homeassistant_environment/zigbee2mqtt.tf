@@ -13,6 +13,13 @@ module "zigbee2mqtt" {
     module.cert_manager
   ]
 
+  chart_cleanup_on_fail    = var.chart_cleanup_on_fail
+  chart_dependency_update  = var.chart_dependency_update
+  chart_linting_enabled    = var.chart_linting_enabled
+  chart_recreate_pods      = var.chart_recreate_pods
+  chart_replace            = var.chart_replace
+  chart_upgrade_install    = var.chart_upgrade_install
+
   namespace                = kubernetes_namespace.namespace.id
 
   mqtt_broker_address      = local.mosquitto_mqtt_broker_address
