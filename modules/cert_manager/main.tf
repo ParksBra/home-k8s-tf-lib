@@ -1,6 +1,7 @@
 module "cert_manager" {
   source = "terraform-iaac/cert-manager/kubernetes"
   depends_on = [
+    data.kubernetes_namespace.namespace,
     kubernetes_secret.dns_solver_api_token
   ]
 
