@@ -1,4 +1,4 @@
-persistence {{ data_persistence_enabled }}
+persistence {{ data_persistence_enabled | str | lower }}
 persistence_location {{ persistence_path }}
 log_dest stdout
 listener {{ mqtt_port }}
