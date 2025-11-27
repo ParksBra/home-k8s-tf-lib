@@ -39,7 +39,7 @@ resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace,
     data.jinja_template.configuration,
-    terraform_data.mosquitto_password_hasher
+    data.external.mosquitto_password_hasher
   ]
 
   name       = local.chart_install_name
