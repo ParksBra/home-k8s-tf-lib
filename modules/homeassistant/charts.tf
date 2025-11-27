@@ -244,9 +244,10 @@ resource "helm_release" "application" {
       },
       {
         name  = "configuration.initScript"
-        value = <<-EOF
+        value = yamlencode(<<-EOF
 ${data.jinja_template.init_script.result}
 EOF
+        )
       }
     ],
     [
