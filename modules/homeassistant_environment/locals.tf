@@ -16,7 +16,4 @@ locals {
   akri_udev_discovery_rules_list = [
     "SUBSYSTEM==\"${var.akri_udev_subsystem}\", ATTRS{idVendor}==\"${var.akri_zigbee_radio_vendor_id}\", ATTRS{idProduct}==\"${var.akri_zigbee_radio_product_id}\""
   ]
-
-  acme_email = var.acme_email
-  cloudflare_email = var.cloudflare_email
 }
