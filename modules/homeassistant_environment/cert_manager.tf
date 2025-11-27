@@ -24,6 +24,7 @@ module "cert_manager" {
   ]
 
   namespace_name        = kubernetes_namespace.namespace.id
+  create_namespace      = false
   cluster_issuer_email  = local.acme_email
   cluster_issuer_create = true
   solvers               = [
