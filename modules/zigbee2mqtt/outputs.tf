@@ -8,9 +8,14 @@ output "namespace_name" {
   value       = data.kubernetes_namespace.namespace.metadata[0].name
 }
 
-output "id" {
-  description = "The name used to install the Zigbee2MQTT Helm chart."
+output "chart_id" {
+  description = "The Helm release ID for Home Assistant."
   value       = helm_release.application.id
+}
+
+output "chart_name" {
+  description = "The Helm chart reference for Home Assistant."
+  value       = helm_release.application.name
 }
 
 output "chart_reference" {
@@ -20,7 +25,7 @@ output "chart_reference" {
 
 output "service_address" {
   description = "The address of the Zigbee2MQTT service."
-  value       = "${helm_release.application.id}.${data.kubernetes_namespace.namespace.id}.svc"
+  value       = "${helm_release.application.name}.${data.kubernetes_namespace.namespace.metadata[0].name}.svc"
 }
 
 output "service_port" {

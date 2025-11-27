@@ -8,9 +8,14 @@ output "namespace_name" {
   value       = data.kubernetes_namespace.namespace.metadata[0].name
 }
 
-output "id" {
-  description = "The Helm release ID for Akri."
+output "chart_id" {
+  description = "The Helm release ID for Home Assistant."
   value       = helm_release.application.id
+}
+
+output "chart_name" {
+  description = "The Helm chart reference for Home Assistant."
+  value       = helm_release.application.name
 }
 
 output "chart_reference" {
