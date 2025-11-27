@@ -17,7 +17,7 @@ data "kubernetes_resources" "akri_udev_instances" {
     module.akri
   ]
   api_version    = "akri.sh/v0"
-  kind           = "instances.akri.sh"
+  kind           = "akrii"
   field_selector = "spec.configurationName==${module.akri.udev_instance_name}"
   namespace      = module.akri.namespace_id
   limit          = 1
