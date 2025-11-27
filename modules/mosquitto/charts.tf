@@ -103,6 +103,14 @@ resource "helm_release" "application" {
       value = local.persistence_path
     },
     {
+      name  = "service.type"
+      value = var.service_type
+    },
+    {
+      name  = "service.externalTrafficPolicy"
+      value = var.service_external_traffic_policy
+    },
+    {
       name  = "ports.mqtt.port"
       value = tostring(var.mqtt_port)
     },
@@ -111,11 +119,11 @@ resource "helm_release" "application" {
       value = "TCP"
     },
     {
-      name  = "service.websocket.port"
+      name  = "ports.websocket.port"
       value = tostring(var.websocket_port)
     },
     {
-      name  = "service.websocket.protocol"
+      name  = "ports.websocket.protocol"
       value = "TCP"
     },
     {
