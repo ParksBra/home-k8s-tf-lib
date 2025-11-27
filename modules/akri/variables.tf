@@ -149,3 +149,9 @@ variable "udev_discovery_group_recursive" {
   type        = bool
   default     = true
 }
+
+variable "enable_creation_wait" {
+  description = "Whether to enable waiting for Akri resources to be created."
+  type        = bool
+  default     = true
+}
