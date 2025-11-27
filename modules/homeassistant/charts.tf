@@ -240,7 +240,7 @@ resource "helm_release" "application" {
       },
       {
         name  = "configuration.templateConfig"
-        value = data.jinja_template.configuration.result
+        value = replace(data.jinja_template.configuration.result, ",", "\\,")
       },
       {
         name  = "configuration.initScript"
