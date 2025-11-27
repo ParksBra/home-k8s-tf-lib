@@ -31,7 +31,7 @@ resource "kubernetes_secret" "codeserver_password_secret" {
   ]
   metadata {
     name = local.codeserver_password_secret_name
-    namespace = data.kubernetes_namespace.namespace.id
+    namespace = data.kubernetes_namespace.namespace.metadata[0].name
   }
   data = {
     password = local.codeserver_password
