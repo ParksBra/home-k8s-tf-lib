@@ -11,7 +11,11 @@ resource "time_sleep" "akri_resources_creation" {
   ]
 
   triggers = {
-    akri_udev_instance_creation = helm_release.application
+    udev_instance_name = var.udev_instance_name
+    udev_discovery_group_recursive = tostring(var.udev_discovery_group_recursive)
+    udev_discovery_enabled = tostring(var.udev_discovery_enabled)
+    udev_discovery_rules_list = join(",", var.udev_discovery_rules_list)
+    udev_enabled = tostring(var.udev_enabled)
   }
 
   create_duration = local.creation_wait_check_interval
