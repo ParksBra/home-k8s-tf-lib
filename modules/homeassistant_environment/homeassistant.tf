@@ -20,6 +20,8 @@ module "homeassistant" {
   ingress_host_address             = local.homeassistant_subdomain
   ingress_annotations              = local.environment_ingress_annotations
 
+  trusted_proxies                  = var.homeassistant_trusted_proxies
+
   pod_host_network_enabled         = true
   pod_dns_policy                   = "ClusterFirstWithHostNet"
 
