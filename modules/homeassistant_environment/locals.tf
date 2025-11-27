@@ -1,10 +1,9 @@
 locals {
   environment_namespace = kubernetes_namespace.namespace.id
   environment_ingress_class_name = var.ingress_class_name
-  # environment_ingress_annotations = {
-  #   "cert-manager.io/cluster-issuer" = module.cert_manager.cluster_issuer_name
-  # }
-  environment_ingress_annotations = var.ingress_annotations
+  environment_ingress_annotations = merge(var.ingress_annotations, {
+    "cert-manager.io/cluster-issuer" = module.cert_manager.cluster_issuer_name
+  })
   parent_domain = var.parent_domain
   homeassistant_subdomain = "${var.homeassistant_subdomain}.${local.parent_domain}"
   homeassistant_codeserver_subdomain = "${var.homeassistant_codeserver_subdomain}.${local.homeassistant_subdomain}"
