@@ -8,7 +8,7 @@ resource "kubernetes_secret" "cloudflare_api_token" {
   ]
   metadata {
     name      = "cloudflare-api-token-secret"
-    namespace = kubernetes_namespace.namespace.id
+    namespace = kubernetes_namespace.namespace.metadata[0].name
   }
   data = {
     "${local.cloudflare_secret_key}" = var.cloudflare_api_token
@@ -23,7 +23,7 @@ module "cert_manager" {
     kubernetes_secret.cloudflare_api_token
   ]
 
-  namespace_name        = kubernetes_namespace.namespace.id
+  namespace_name        = kubernetes_namespace.namespace.metadata[0].name
   create_namespace      = false
   cluster_issuer_email  = local.acme_email
   cluster_issuer_create = true

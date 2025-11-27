@@ -47,7 +47,7 @@ resource "helm_release" "application" {
   chart      = local.chart_reference
   version    = var.chart_version
 
-  namespace        = data.kubernetes_namespace.namespace.id
+  namespace        = data.kubernetes_namespace.namespace.metadata[0].name
   create_namespace = false
 
   dependency_update = var.chart_dependency_update

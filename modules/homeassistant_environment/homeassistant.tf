@@ -13,7 +13,7 @@ module "homeassistant" {
   chart_replace                    = var.chart_replace
   chart_upgrade_install            = var.chart_upgrade_install
 
-  namespace                        = kubernetes_namespace.namespace.id
+  namespace                        = kubernetes_namespace.namespace.metadata[0].name
 
   ingress_enabled                  = true
   ingress_class_name               = local.environment_ingress_class_name
@@ -27,7 +27,7 @@ module "homeassistant" {
 
   data_storage_persistence_enabled = var.enable_persistent_storage
   data_volume_size_gb              = local.homeassistant_storage_size_gb
-  data_storage_class_name          = var.enable_persistent_storage ? module.storageclass[0].id : ""
+  data_storage_class_name          = var.enable_persistent_storage ? module.storageclass[0].name : ""
 
   codeserver_enabled               = true
   codeserver_auth_enabled          = true

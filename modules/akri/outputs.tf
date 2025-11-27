@@ -3,6 +3,11 @@ output "namespace_id" {
   value       = data.kubernetes_namespace.namespace.id
 }
 
+output "namespace_name" {
+  description = "The name of the namespace in which Akri is deployed."
+  value       = data.kubernetes_namespace.namespace.metadata[0].name
+}
+
 output "id" {
   description = "The Helm release ID for Akri."
   value       = helm_release.application.id

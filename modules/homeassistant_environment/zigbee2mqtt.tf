@@ -20,7 +20,7 @@ module "zigbee2mqtt" {
   chart_replace            = var.chart_replace
   chart_upgrade_install    = var.chart_upgrade_install
 
-  namespace                = kubernetes_namespace.namespace.id
+  namespace                = kubernetes_namespace.namespace.metadata[0].name
 
   mqtt_broker_address      = local.mosquitto_mqtt_broker_address
   mqtt_broker_username     = module.mosquitto.admin_username
@@ -28,7 +28,7 @@ module "zigbee2mqtt" {
 
   data_persistence_enabled = var.enable_persistent_storage
   data_volume_size_gb      = local.zigbee2mqtt_storage_size_gb
-  data_storage_class_name  = var.enable_persistent_storage ? module.storageclass[0].id : ""
+  data_storage_class_name  = var.enable_persistent_storage ? module.storageclass[0].name : ""
 
   ingress_enabled          = true
   ingress_class_name       = local.environment_ingress_class_name
