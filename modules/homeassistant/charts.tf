@@ -250,14 +250,14 @@ resource "helm_release" "application" {
     [
       for k, v in var.ingress_annotations:
       {
-        name  = "ingress.annotations.${k}"
+        name  = "ingress.annotations.${replace(k, ".", "\\.")}"
         value = tostring(v)
       }
     ],
     [
       for k, v in var.codeserver_ingress_annotations:
       {
-        name  = "addons.codeserver.ingress.annotations.${k}"
+        name  = "addons.codeserver.ingress.annotations.${replace(k, ".", "\\.")}"
         value = tostring(v)
       }
     ]

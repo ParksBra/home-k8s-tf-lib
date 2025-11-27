@@ -150,11 +150,11 @@ resource "helm_release" "application" {
       [for k, v in var.pod_additional_resources :
         [
           {
-            name  = "statefulSet.resources.requests.${k}"
+            name  = "statefulSet.resources.requests.${replace(k, ".", "\\.")}"
             value = tostring(v)
           },
           {
-            name  = "statefulSet.resources.limits.${k}"
+            name  = "statefulSet.resources.limits.${replace(k, ".", "\\.")}"
             value = tostring(v)
           }
         ]
@@ -163,7 +163,7 @@ resource "helm_release" "application" {
     [
       for k, v in var.ingress_annotations:
       {
-        name  = "ingress.annotations.${k}"
+        name  = "ingress.annotations.${replace(k, ".", "\\.")}"
         value = tostring(v)
       }
     ]
