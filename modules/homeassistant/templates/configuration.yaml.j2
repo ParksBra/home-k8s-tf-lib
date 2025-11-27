@@ -5,10 +5,10 @@ logger:
 {% for config in included_configurations %}
 {{ config }}: !include {{ config }}s.yaml
 {% endfor %}
+
 {% if enable_my_ha %}
 my:
-{% endif %}
-{% if enable_mobile_app %}
+{% endif %} {% if enable_mobile_app %}
 mobile_app:
 {% endif %}
 http:
@@ -18,5 +18,4 @@ http:
   use_x_forwarded_for: {{ use_x_forwarded_for | string | lower }}
   trusted_proxies:
     {% for proxy in trusted_proxies %}
-    - {{ proxy }}
-    {% endfor %}
+    - {{ proxy }} {% endfor %}
