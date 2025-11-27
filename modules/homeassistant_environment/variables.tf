@@ -62,7 +62,7 @@ variable "homeassistant_subdomain" {
 
 variable "homeassistant_trusted_proxies" {
   description = "A list of trusted proxies for Home Assistant."
-  type        = list(string)
+  type        = list
   default     = []
 }
 
