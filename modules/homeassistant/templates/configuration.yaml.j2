@@ -17,9 +17,9 @@ mobile_app:
 
 http:
   server_port: 8123 # Keep as default unless helm chart is changed
-  ip_ban_enabled: {{ ip_ban_enabled }}
+  ip_ban_enabled: {{ ip_ban_enabled | string | lower }}
   login_attempts_threshold: {{ ip_ban_threshold }}
-  use_x_forwarded_for: {{ use_x_forwarded_for }}
+  use_x_forwarded_for: {{ use_x_forwarded_for | string | lower }}
   trusted_proxies:
     {% for proxy in homeassistant_trusted_proxies %}
     - {{ proxy }}
