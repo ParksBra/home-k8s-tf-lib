@@ -196,7 +196,7 @@ resource "helm_release" "application" {
       },
       {
         name  = "addons.codeserver.auth.existingSecret"
-        value = var.codeserver_auth_enabled ? kubernetes_secret.codeserver_password_secret[0].id : tostring(null)
+        value = var.codeserver_auth_enabled ? kubernetes_secret.codeserver_password_secret[0].metadata[0].name : tostring(null)
       },
       {
         name  = "addons.codeserver.service.type"
