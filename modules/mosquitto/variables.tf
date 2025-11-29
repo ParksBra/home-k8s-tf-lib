@@ -15,7 +15,7 @@ variable "namespace" {
 variable "create_namespace" {
   description = "Whether to create the namespace for the module."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "chart_install_name" {

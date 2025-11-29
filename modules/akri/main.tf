@@ -1,12 +1,3 @@
-locals {
-  repository = "https://project-akri.github.io/akri"
-  chart_reference = "akri"
-}
-
-locals {
-  chart_install_name = var.chart_install_name != null ? var.chart_install_name : local.chart_reference
-}
-
 resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace

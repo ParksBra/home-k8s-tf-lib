@@ -4,6 +4,12 @@ variable "namespace" {
   default     = "homeassistant"
 }
 
+variable "create_namespace" {
+  description = "Whether to create the Kubernetes namespace for the Home Assistant environment."
+  type        = bool
+  default     = true
+}
+
 variable "python_executable" {
   description = "The Python executable to use for running the Mosquitto password hasher script. Must have the 'passlib' module installed."
   type        = string

@@ -1,7 +1,3 @@
-locals {
-  creation_wait_check_interval = "30s"
-}
-
 # We want to wait for auto-discovery to have a chance to create the Akri instances
 resource "time_sleep" "akri_resources_creation" {
   count = var.enable_creation_wait ? 1 : 0
@@ -18,5 +14,5 @@ resource "time_sleep" "akri_resources_creation" {
     udev_enabled = tostring(var.udev_enabled)
   }
 
-  create_duration = local.creation_wait_check_interval
+  create_duration = local.creation_wait_check_duration
 }

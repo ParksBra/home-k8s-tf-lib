@@ -1,40 +1,3 @@
-locals {
-  repository = "https://storage.googleapis.com/t3n-helm-charts"
-  chart_reference = "mosquitto"
-}
-
-locals {
-  chart_install_name = var.chart_install_name != null ? var.chart_install_name : local.chart_reference
-}
-
-locals {
-  persistence_path = "/mosquitto/data/"
-  password_file_path = "/etc/mosquitto/passwordfile"
-}
-
-locals {
-  configuration_template_path = "${path.module}/templates/configuration.j2"
-  jinja_context = jsonencode({
-    data_persistence_enabled = var.data_persistence_enabled
-    persistence_path         = local.persistence_path
-    password_file_path       = local.password_file_path
-    mqtt_port                = var.mqtt_port
-    websocket_port           = var.websocket_port
-  })
-}
-
-data "jinja_template" "configuration" {
-  context {
-    type = "json"
-    data = local.jinja_context
-  }
-
-  source {
-    directory = dirname(local.configuration_template_path)
-    template  = file(local.configuration_template_path)
-  }
-}
-
 resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace,
@@ -80,7 +43,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "config"
-      value = data.jinja_template.configuration.result
+      value = replace(data.jinja_template.configuration.result, ",", "\\,")
     },
     {
       name  = "persistence.enabled"

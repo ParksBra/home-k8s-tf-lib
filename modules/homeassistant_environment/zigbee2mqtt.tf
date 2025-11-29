@@ -1,11 +1,7 @@
-locals {
-  mosquitto_mqtt_broker_address = "mqtt://${module.mosquitto.service_address}:${module.mosquitto.service_mqtt_port}"
-}
-
 module "zigbee2mqtt" {
   source = "../zigbee2mqtt"
   depends_on = [
-    kubernetes_namespace.namespace,
+    data.kubernetes_namespace.namespace,
     module.akri,
     data.kubernetes_resources.akri_udev_instances,
     module.mosquitto,
@@ -19,7 +15,8 @@ module "zigbee2mqtt" {
   chart_replace            = var.chart_replace
   chart_upgrade_install    = var.chart_upgrade_install
 
-  namespace                = kubernetes_namespace.namespace.metadata[0].name
+  namespace                = data.kubernetes_namespace.namespace.metadata[0].name
+  create_namespace         = false
 
   mqtt_broker_address      = local.mosquitto_mqtt_broker_address
   mqtt_broker_username     = module.mosquitto.admin_username

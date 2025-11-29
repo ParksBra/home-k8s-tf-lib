@@ -1,13 +1,15 @@
 module "akri" {
   source = "../akri"
   depends_on = [
-    kubernetes_namespace.namespace,
+    data.kubernetes_namespace.namespace,
   ]
 
-  namespace                      = kubernetes_namespace.namespace.metadata[0].name
+  namespace                      = data.kubernetes_namespace.namespace.metadata[0].name
+
+  create_namespace               = false
 
   udev_discovery_enabled         = true
-  udev_instance_name             = "${kubernetes_namespace.namespace.metadata[0].name}-udev"
+  udev_instance_name             = "${data.kubernetes_namespace.namespace.metadata[0].name}-udev"
   udev_discovery_group_recursive = true
   udev_discovery_rules_list      = local.akri_udev_discovery_rules_list
 }

@@ -1,7 +1,7 @@
 module "homeassistant" {
   source = "../homeassistant"
   depends_on = [
-    kubernetes_namespace.namespace,
+    data.kubernetes_namespace.namespace,
     module.storageclass
   ]
 
@@ -12,7 +12,7 @@ module "homeassistant" {
   chart_replace                    = var.chart_replace
   chart_upgrade_install            = var.chart_upgrade_install
 
-  namespace                        = kubernetes_namespace.namespace.metadata[0].name
+  namespace                        = data.kubernetes_namespace.namespace.metadata[0].name
 
   ingress_enabled                  = true
   ingress_class_name               = local.environment_ingress_class_name

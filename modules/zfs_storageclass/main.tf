@@ -1,7 +1,3 @@
-locals {
-  filesystem_type = "zfs"
-}
-
 resource "kubernetes_storage_class" "zfs" {
   metadata {
     name          = var.name

@@ -1,16 +1,3 @@
-locals {
-  repository = "https://kubernetes.github.io/dashboard"
-  chart_reference = "kubernetes-dashboard"
-}
-
-locals {
-  chart_install_name = var.chart_install_name != null ? var.chart_install_name : local.chart_reference
-}
-
-locals {
-  tls_secret_name = "${local.chart_install_name}-ingress-tls"
-}
-
 resource "helm_release" "application" {
   depends_on = [
     data.kubernetes_namespace.namespace

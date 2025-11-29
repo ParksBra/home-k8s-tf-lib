@@ -1,8 +1,3 @@
-locals {
-  codeserver_generate_password = var.codeserver_password == null && var.codeserver_auth_enabled ? true : false
-  codeserver_generated_password_length = 32
-}
-
 resource "random_password" "codeserver_password" {
   count            = local.codeserver_generate_password ? 1 : 0
   length           = local.codeserver_generated_password_length
@@ -16,11 +11,6 @@ resource "random_password" "codeserver_password" {
   keepers          = {
     codeserver_generated_password_length = local.codeserver_generated_password_length
   }
-}
-
-locals {
-  codeserver_password_secret_name = "${local.chart_install_name}-codeserver-auth"
-  codeserver_password = var.codeserver_password != null ? var.codeserver_password : random_password.codeserver_password[0].result
 }
 
 resource "kubernetes_secret" "codeserver_password_secret" {

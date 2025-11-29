@@ -1,7 +1,7 @@
 module "mosquitto" {
   source = "../mosquitto"
   depends_on = [
-    kubernetes_namespace.namespace,
+    data.kubernetes_namespace.namespace,
     module.storageclass
   ]
 
@@ -14,7 +14,7 @@ module "mosquitto" {
 
   python_executable               = var.python_executable
 
-  namespace                       = kubernetes_namespace.namespace.id
+  namespace                       = data.kubernetes_namespace.namespace.metadata[0].name
 
   data_persistence_enabled        = var.enable_persistent_storage
   data_volume_size_gb             = local.mosquitto_storage_size_gb
