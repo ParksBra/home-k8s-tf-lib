@@ -1,5 +1,5 @@
 locals {
-  environment_namespace = kubernetes_namespace.namespace.id
+  environment_namespace = data.kubernetes_namespace.namespace.metadata[0].name
   environment_ingress_class_name = var.ingress_class_name
   environment_ingress_annotations = var.ingress_annotations
   parent_domain = var.parent_domain
