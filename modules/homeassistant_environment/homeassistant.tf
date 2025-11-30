@@ -13,6 +13,7 @@ module "homeassistant" {
   chart_upgrade_install            = var.chart_upgrade_install
 
   namespace                        = data.kubernetes_namespace.namespace.metadata[0].name
+  create_namespace                 = false
 
   ingress_enabled                  = true
   ingress_class_name               = local.environment_ingress_class_name
