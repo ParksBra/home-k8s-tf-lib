@@ -15,6 +15,7 @@ module "mosquitto" {
   python_executable               = var.python_executable
 
   namespace                       = data.kubernetes_namespace.namespace.metadata[0].name
+  create_namespace                = false
 
   data_persistence_enabled        = var.enable_persistent_storage
   data_volume_size_gb             = local.mosquitto_storage_size_gb
