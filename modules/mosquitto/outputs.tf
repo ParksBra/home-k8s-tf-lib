@@ -9,12 +9,12 @@ output "namespace_name" {
 }
 
 output "chart_id" {
-  description = "The Helm release ID for Home Assistant."
+  description = "The Helm release ID for Mosquitto."
   value       = helm_release.application.id
 }
 
 output "chart_name" {
-  description = "The Helm chart reference for Home Assistant."
+  description = "The Helm chart reference for Mosquitto."
   value       = helm_release.application.name
 }
 
