@@ -30,7 +30,7 @@ output "tenant_access_id" {
 
 output "tenant_access_key" {
   description = "The access key for the MinIO tenant."
-  value       = var.access_key
+  value       = local.access_key
   sensitive   = true
 }
 
