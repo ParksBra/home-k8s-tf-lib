@@ -1,9 +1,4 @@
 output "namespace" {
-  description = "The namespace ID where Kubernetes Dashboard is deployed."
-  value       = data.kubernetes_namespace.namespace.id
-}
-
-output "namespace_name" {
   description = "The name of the namespace in which Kubernetes Dashboard is deployed."
   value       = data.kubernetes_namespace.namespace.metadata[0].name
 }

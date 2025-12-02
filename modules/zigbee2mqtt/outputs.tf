@@ -1,9 +1,4 @@
 output "namespace" {
-  description = "The namespace where Zigbee2MQTT is deployed."
-  value       = data.kubernetes_namespace.namespace.id
-}
-
-output "namespace_name" {
   description = "The name of the namespace in which Zigbee2MQTT is deployed."
   value       = data.kubernetes_namespace.namespace.metadata[0].name
 }

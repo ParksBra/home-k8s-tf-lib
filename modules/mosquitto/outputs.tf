@@ -1,9 +1,4 @@
-output "namespace_id" {
-  description = "The namespace ID where Mosquitto is deployed."
-  value       = data.kubernetes_namespace.namespace.id
-}
-
-output "namespace_name" {
+output "namespace" {
   description = "The name of the namespace in which Mosquitto is deployed."
   value       = data.kubernetes_namespace.namespace.metadata[0].name
 }
