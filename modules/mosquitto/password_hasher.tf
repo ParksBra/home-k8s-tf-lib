@@ -30,7 +30,7 @@ resource "random_password" "admin_salt" {
   min_numeric      = 0
   keepers          = {
     generated_salt_length = local.generated_salt_length
-    admin_password        =  local.admin_password
+    admin_password        = local.admin_password
   }
 }
 
