@@ -64,3 +64,15 @@ variable "pod_network_cidr" {
   description = "The Pod Network CIDR for the Tigera Operator (Calico) configuration."
   type        = string
 }
+
+variable "enable_creation_wait" {
+  description = "Whether to enable waiting for Akri resources to be created."
+  type        = bool
+  default     = true
+}
+
+variable "creation_wait_seconds" {
+  description = "The time in seconds to wait for Akri resources to be created."
+  type        = number
+  default     = 30
+}

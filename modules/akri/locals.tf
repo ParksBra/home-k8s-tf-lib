@@ -6,5 +6,5 @@ locals {
 
   namespace = var.namespace != null ? var.namespace : local.chart_install_name
 
-  creation_wait_check_duration = "30s"
+  creation_wait_check_duration = "${var.creation_wait_seconds}s"
 }
