@@ -22,3 +22,13 @@ output "ingress_class_name" {
   description = "The Ingress class name provided by the TailScale operator."
   value       = var.ingress_class_name
 }
+
+output "operator_default_tags" {
+  description = "The default tags applied to the TailScale operator."
+  value       = var.operator_default_tags
+}
+
+output "proxy_default_tags" {
+  description = "The default tags applied to TailScale nodes managed by the operator."
+  value       = var.proxy_default_tags
+}
