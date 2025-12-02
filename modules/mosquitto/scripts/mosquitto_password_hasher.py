@@ -2,7 +2,7 @@
 # Based on: https://shantanoo-desai.github.io/posts/technology/mosquitto_ansible_passgen
 import sys
 import json
-import passlib.hash
+import passlib.hash # type: ignore
 
 SALT_SIZE = 12
 ITERATIONS = 101
@@ -19,7 +19,7 @@ def mosquitto_passwd(passwd: str, salt: str = "") -> str:
     hasher_args = {"rounds": ITERATIONS}
     if salt:
         salt_bytes = str(salt).encode("utf-8")
-        hasher_args["salt"] = salt_bytes
+        hasher_args["salt"] = salt_bytes # type: ignore
         hasher_args["salt_size"] = len(salt_bytes)
     else:
         hasher_args["salt_size"] = SALT_SIZE
