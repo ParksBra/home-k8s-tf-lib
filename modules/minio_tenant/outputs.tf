@@ -36,7 +36,7 @@ output "tenant_access_key" {
 
 output "tenant_service_address" {
   description = "The address of the MinIO tenant service."
-  value       = "${helm_release.application.name}.${data.kubernetes_namespace.namespace.metadata[0].name}.svc"
+  value       = "minio.${data.kubernetes_namespace.namespace.metadata[0].name}.svc"
 }
 
 output "tenant_service_protocol" {
