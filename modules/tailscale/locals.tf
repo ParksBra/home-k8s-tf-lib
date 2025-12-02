@@ -1,6 +1,6 @@
 locals {
   repository = "https://pkgs.tailscale.com/helmcharts"
-  chart_reference = "tailscale"
+  chart_reference = "tailscale-operator"
 
   chart_install_name = var.chart_install_name != null ? var.chart_install_name : local.chart_reference
 
