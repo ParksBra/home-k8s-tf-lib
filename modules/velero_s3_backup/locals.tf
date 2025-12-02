@@ -8,7 +8,7 @@ locals {
 
   credentials_secret_name = "${local.chart_install_name}-credentials"
 
-  backup_storage_location_name = "${local.chart_install_name}-bsl"
+  backup_storage_location_name = "default"
 
   aws_plugin_repository = "velero/velero-plugin-for-aws"
 }

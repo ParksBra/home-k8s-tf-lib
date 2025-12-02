@@ -80,7 +80,7 @@ variable "buckets" {
 variable "pool_name" {
   description = "The name of the storage pool to use for the MinIO tenant."
   type        = string
-  default     = "minio-pool"
+  default     = "pool0"
 }
 
 variable "pool_size_gb" {
@@ -135,7 +135,7 @@ variable "pool_group_id" {
 variable "access_id" {
   description = "The access ID for the MinIO tenant."
   type        = string
-  default     = "minio"
+  default     = "minio_admin"
 }
 
 variable "access_key" {
