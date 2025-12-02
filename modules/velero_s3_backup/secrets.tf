@@ -8,7 +8,7 @@ resource "kubernetes_secret" "credentials" {
     namespace = data.kubernetes_namespace.namespace.metadata[0].name
   }
   data = {
-    cloud = replace(data.jinja_template.configuration.result, ",", "\\,")
+    cloud = replace(data.jinja_template.credentials.result, ",", "\\,")
   }
   type = "Opaque"
 }
