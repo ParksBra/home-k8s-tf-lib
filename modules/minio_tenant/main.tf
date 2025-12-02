@@ -41,6 +41,10 @@ resource "helm_release" "application" {
         value = "${var.pool_size_gb}Gi"
       },
       {
+        name  = "tenant.pools[0].storageClassName"
+        value = var.pool_storage_class_name
+      },
+      {
         name  = "tenant.pools[0].servers"
         value = tostring(var.pool_server_count)
       },
