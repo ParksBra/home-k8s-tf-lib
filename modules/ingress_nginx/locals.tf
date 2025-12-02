@@ -10,4 +10,6 @@ locals {
 
   controller_name = "controller"
   controller_full_name = "${local.chart_install_name}-${local.controller_name}"
+
+  loadbalancer_ips = [for ingress in data.kubernetes_service.controller.status[0].load_balancer[0].ingress: ingress if contains(keys(ingress), "ip") && ingress.ip != ""]
 }
