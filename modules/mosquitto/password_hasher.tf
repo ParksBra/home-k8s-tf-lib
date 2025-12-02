@@ -26,8 +26,8 @@ resource "random_password" "admin_salt" {
   numeric          = false
   lower            = true
   upper            = true
-  min_lower        = 0
-  min_upper        = 0
+  min_lower        = 1
+  min_upper        = 1
   min_numeric      = 0
   keepers          = {
     generated_salt_length = local.generated_salt_length
