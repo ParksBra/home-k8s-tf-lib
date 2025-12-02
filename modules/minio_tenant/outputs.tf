@@ -20,7 +20,7 @@ output "chart_name" {
 
 output "tenant_name" {
   description = "The name of the MinIO tenant."
-  value       = helm_release.tenant.metadata[0].name
+  value       = helm_release.application.metadata[0].name
 }
 
 output "tenant_access_id" {
@@ -36,7 +36,7 @@ output "tenant_access_key" {
 
 output "tenant_service_address" {
   description = "The address of the MinIO tenant service."
-  value       = "${helm_release.tenant.metadata[0].name}.${data.kubernetes_namespace.namespace.metadata[0].name}.svc"
+  value       = "${helm_release.application.metadata[0].name}.${data.kubernetes_namespace.namespace.metadata[0].name}.svc"
 }
 
 output "tenant_service_protocol" {

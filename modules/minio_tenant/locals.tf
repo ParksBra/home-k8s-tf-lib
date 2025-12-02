@@ -17,7 +17,7 @@ locals {
 
 locals {
   # Jinja Template Data Sources
-  credentials_template_path = "${path.module}/templates/credentials.j2"
+  configuration_template_path = "${path.module}/templates/configuration.j2"
   jinja_context = jsonencode({
     access_id  = var.access_id
     access_key = local.access_key
