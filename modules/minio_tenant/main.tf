@@ -92,14 +92,18 @@ resource "helm_release" "application" {
       }
     ],
   )
-  set_list = [
-    {
-      name  = "tenant.buckets"
-      value = jsonencode(var.buckets)
-    },
-    {
-      name  = "tenant.pools[0].tolerations"
-      value = jsonencode(var.pool_tolerations)
-    }
+  values = [
+    yamlencode(
+      {
+        tenant = {
+          buckets = var.buckets
+          pools   = [
+            {
+              tolerations = var.pool_tolerations
+            }
+          ]
+        }
+      }
+    )
   ]
 }
