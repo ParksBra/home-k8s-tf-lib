@@ -1,20 +1,15 @@
-output "namespace_id" {
-  description = "The namespace ID where Mosquitto is deployed."
-  value       = data.kubernetes_namespace.namespace.id
-}
-
-output "namespace_name" {
+output "namespace" {
   description = "The name of the namespace in which Mosquitto is deployed."
   value       = data.kubernetes_namespace.namespace.metadata[0].name
 }
 
 output "chart_id" {
-  description = "The Helm release ID for Home Assistant."
+  description = "The Helm release ID for Mosquitto."
   value       = helm_release.application.id
 }
 
 output "chart_name" {
-  description = "The Helm chart reference for Home Assistant."
+  description = "The Helm chart reference for Mosquitto."
   value       = helm_release.application.name
 }
 

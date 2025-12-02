@@ -155,3 +155,9 @@ variable "enable_creation_wait" {
   type        = bool
   default     = true
 }
+
+variable "creation_wait_seconds" {
+  description = "The time in seconds to wait for Akri resources to be created."
+  type        = number
+  default     = 30
+}
