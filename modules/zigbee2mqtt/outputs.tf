@@ -35,7 +35,7 @@ output "ingress_enabled" {
 
 output "ingress_address" {
   description = "The ingress address of the Home Assistant service."
-  value       = var.ingress_host_address
+  value       = var.ingress_enabled ? var.ingress_host_address : ""
 }
 
 output "tls_secret_name" {
