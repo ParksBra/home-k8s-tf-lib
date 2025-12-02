@@ -1,6 +1,7 @@
 locals {
   generate_password = var.admin_password == null
   generated_password_length = 32
+  generated_salt_length     = 12
 }
 
 resource "random_password" "admin_password" {
@@ -18,10 +19,26 @@ resource "random_password" "admin_password" {
   }
 }
 
-locals {
-  admin_password = var.admin_password != null ? var.admin_password : random_password.admin_password[0].result
+resource "random_password" "admin_salt" {
+  count            = local.generate_password ? 1 : 0
+  length           = local.generated_salt_length
+  special          = false
+  numeric          = false
+  lower            = true
+  upper            = true
+  min_lower        = 0
+  min_upper        = 0
+  min_numeric      = 0
+  keepers          = {
+    generated_salt_length = local.generated_salt_length
+    admin_password       =  local.admin_password
+  }
 }
 
 data "external" "mosquitto_password_hasher" {
-  program = ["${var.python_executable}", "${path.module}/scripts/mosquitto_password_hasher.py", local.admin_password]
+  depends_on = [
+    random_password.admin_password,
+    random_password.admin_salt,
+  ]
+  program = ["${var.python_executable}", "${path.module}/scripts/mosquitto_password_hasher.py", local.admin_password, random_password.admin_salt[0].result]
 }
