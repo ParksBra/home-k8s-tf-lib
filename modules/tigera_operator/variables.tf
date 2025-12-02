@@ -66,13 +66,13 @@ variable "pod_network_cidr" {
 }
 
 variable "enable_creation_wait" {
-  description = "Whether to enable waiting for Akri resources to be created."
+  description = "Whether to enable waiting for Tigera Operator resources to be created."
   type        = bool
   default     = true
 }
 
 variable "creation_wait_seconds" {
-  description = "The time in seconds to wait for Akri resources to be created."
+  description = "The time in seconds to wait for Tigera Operator resources to be created."
   type        = number
   default     = 30
 }

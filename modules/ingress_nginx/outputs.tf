@@ -22,3 +22,13 @@ output "https_port" {
   description = "The HTTPS port exposed by the Ingress NGINX controller."
   value       = var.service_https_port
 }
+
+output "service_type" {
+  description = "The type of service created for the Ingress NGINX controller."
+  value       = var.service_type
+}
+
+output "service_loadbalancer_ip" {
+  description = "The LoadBalancer IP address assigned to the Ingress NGINX controller service. Null if service type is not LoadBalancer or if no LoadBalancer IP is assigned."
+  value       = var.service_type == "LoadBalancer" && length(local.loadbalancer_ips) > 0 ? local.loadbalancer_ips[0].ip : null
+}

@@ -83,3 +83,15 @@ variable "service_https_port" {
   type        = number
   default     = 443
 }
+
+variable "enable_creation_wait" {
+  description = "Whether to enable waiting for Ingress NGINX resources to be created."
+  type        = bool
+  default     = true
+}
+
+variable "creation_wait_seconds" {
+  description = "The time in seconds to wait for Ingress NGINX resources to be created."
+  type        = number
+  default     = 45
+}

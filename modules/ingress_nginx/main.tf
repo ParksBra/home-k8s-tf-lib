@@ -20,6 +20,10 @@ resource "helm_release" "application" {
 
   set = [
     {
+      name  = "controller.name"
+      value = local.controller_name
+    },
+    {
       name  = "controller.service.type"
       value = var.service_type
     },
@@ -44,4 +48,16 @@ resource "helm_release" "application" {
       value = "https"
     }
   ]
+}
+
+data "kubernetes_service" "controller" {
+  depends_on = [
+    helm_release.application,
+    time_sleep.resources_creation
+  ]
+
+  metadata {
+    name      = local.controller_full_name
+    namespace = data.kubernetes_namespace.namespace.metadata[0].name
+  }
 }
