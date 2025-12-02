@@ -110,7 +110,7 @@ variable "pool_node_selector" {
   description = "A map of node selector labels to use for the storage pool pods."
   type        = map(string)
   default     = {
-    minio.io/storage-node = "true"
+    "minio.io/storage-node" = "true"
   }
 }
 
