@@ -28,7 +28,7 @@ resource "helm_release" "application" {
       value = "false"
     },
     {
-      name  = "engines.loki-stack.enabled"
+      name  = "loki.enabled"
       value = "false"
     },
     {
