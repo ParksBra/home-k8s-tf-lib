@@ -116,12 +116,7 @@ variable "pool_node_selector" {
 
 variable "pool_tolerations" {
   description = "A list of tolerations to apply to the storage pool pods."
-  type        = list(object({
-    key      = string
-    operator = string
-    value    = string
-    effect   = string
-  }))
+  type        = list
   default     = []
 }
 
