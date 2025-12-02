@@ -1,8 +1,6 @@
 resource "kubernetes_secret" "oauth" {
   depends_on = [
-    random_password.access_key,
-    data.kubernetes_namespace.namespace,
-    data.jinja_template.configuration
+    data.kubernetes_namespace.namespace
   ]
   metadata {
     name = local.oauth_secret_name
