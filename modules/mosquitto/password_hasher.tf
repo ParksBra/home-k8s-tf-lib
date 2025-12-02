@@ -20,7 +20,6 @@ resource "random_password" "admin_password" {
 }
 
 resource "random_password" "admin_salt" {
-  count            = local.generate_password ? 1 : 0
   length           = local.generated_salt_length
   special          = false
   numeric          = false
@@ -40,5 +39,5 @@ data "external" "mosquitto_password_hasher" {
     random_password.admin_password,
     random_password.admin_salt,
   ]
-  program = ["${var.python_executable}", "${path.module}/scripts/mosquitto_password_hasher.py", local.admin_password, random_password.admin_salt[0].result]
+  program = ["${var.python_executable}", "${path.module}/scripts/mosquitto_password_hasher.py", local.admin_password, random_password.admin_salt.result]
 }
