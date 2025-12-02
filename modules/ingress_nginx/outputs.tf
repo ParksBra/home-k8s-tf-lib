@@ -30,5 +30,5 @@ output "service_type" {
 
 output "service_loadbalancer_ip" {
   description = "The LoadBalancer IP address assigned to the Ingress NGINX controller service. Null if service type is not LoadBalancer."
-  value       = local.loadbalancer_ip
+  value       = var.service_type == "LoadBalancer" ? data.kubernetes_service.controller.status[0].load_balancer[0].ingress[0].ip : null
 }

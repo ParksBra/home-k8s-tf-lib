@@ -49,3 +49,15 @@ resource "helm_release" "application" {
     }
   ]
 }
+
+data "kubernetes_service" "controller" {
+  depends_on = [
+    helm_release.application,
+    time_sleep.resources_creation
+  ]
+
+  metadata {
+    name      = local.controller_full_name
+    namespace = data.kubernetes_namespace.namespace.metadata[0].name
+  }
+}
