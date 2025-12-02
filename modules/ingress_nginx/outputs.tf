@@ -22,3 +22,8 @@ output "https_port" {
   description = "The HTTPS port exposed by the Ingress NGINX controller."
   value       = var.service_https_port
 }
+
+output "loadbalancer_ip" {
+  description = "The LoadBalancer IP address assigned to the Ingress NGINX controller service. Null if service type is not LoadBalancer."
+  value       = local.loadbalancer_ip
+}

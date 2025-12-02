@@ -20,6 +20,10 @@ resource "helm_release" "application" {
 
   set = [
     {
+      name  = "controller.name"
+      value = local.controller_name
+    },
+    {
       name  = "controller.service.type"
       value = var.service_type
     },
