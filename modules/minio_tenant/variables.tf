@@ -70,7 +70,7 @@ variable "buckets" {
   }))
   default     = [
     {
-      name       = "minio"
+      name       = "bucket0"
       region     = "minio"
       objectLock = false
     }
