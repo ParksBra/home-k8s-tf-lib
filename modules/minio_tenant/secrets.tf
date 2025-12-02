@@ -24,7 +24,7 @@ resource "kubernetes_secret" "password_secret" {
     namespace = data.kubernetes_namespace.namespace.metadata[0].name
   }
   data = {
-    config.env = replace(data.jinja_template.configuration.result, ",", "\\,")
+    "config.env" = replace(data.jinja_template.configuration.result, ",", "\\,")
   }
   type = "Opaque"
 }
