@@ -22,7 +22,7 @@ resource "kubernetes_manifest" "scheduled_backup" {
       )
     }
     spec = {
-      scghedule               = join(" ", each.value.schedule)
+      schedule                = join(" ", each.value.schedule)
       template                = {
         ttl                     = lookup(each.value, "ttl_minutes", null) != null ? "${each.value.ttl_minutes}m" : null
         includedNamespaces      = lookup(each.value, "included_namespaces", ["*"])
