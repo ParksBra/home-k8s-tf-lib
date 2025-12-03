@@ -1,4 +1,4 @@
-resource "kubectl_manifest" "scheduled_backup" {
+resource "kubectl_manifest" "scheduled_backup" { # We want to use kubectl_manifest here as kubernetes_manifest fails to plan before crd's exist.
   for_each = var.scheduled_backups
 
   depends_on = [
