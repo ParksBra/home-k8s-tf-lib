@@ -111,7 +111,7 @@ variable "aws_plugin_tag" {
 }
 
 variable "scheduled_backups" {
-  description = "A map of scheduled backup configurations for Velero. Each key is the name of the schedule, and the value is an object with the following attributes: 'schedule' (string, required), 'ttl' (string, optional), 'included_namespaces' (list of strings, optional), 'excluded_namespaces' (list of strings, optional), 'included_resources' (list of strings, optional), 'excluded_resources' (list of strings, optional), and 'storage_location' (string, optional)."
+  description = "A map of scheduled backup configurations for Velero. Each key is the name of the schedule and the value is an object with respetive attributes."
   type = map(object({
     schedule                  = list(string, string, string, string, string)
     ttl_minutes               = optional(number)
