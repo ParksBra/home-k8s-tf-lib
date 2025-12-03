@@ -107,5 +107,35 @@ variable "internal_kubectl_tag" {
 variable "aws_plugin_tag" {
   description = "The version tag for the Velero AWS plugin image."
   type        = string
-  default     = "v1.7.0"
+  default     = "latest"
+}
+
+variable "scheduled_backups" {
+  description = "A map of scheduled backup configurations for Velero. Each key is the name of the schedule and the value is an object with respetive attributes."
+  type = map(object({
+    schedule                  = tuple([string, string, string, string, string])
+    ttl_minutes               = optional(number)
+    included_namespaces       = optional(list(string))
+    excluded_namespaces       = optional(list(string))
+    included_resources        = optional(list(string))
+    excluded_resources        = optional(list(string))
+    include_cluster_resources = optional(bool)
+    selected_labels           = optional(map(string))
+    storage_location          = optional(string)
+    schedule_labels           = optional(map(string))
+    schedule_annotations      = optional(map(string))
+  }))
+  default = {}
+}
+
+variable "scheduled_backup_common_labels" {
+  description = "Common labels to apply to all scheduled backups."
+  type        = map(string)
+  default     = {}
+}
+
+variable "scheduled_backup_common_annotations" {
+  description = "Common annotations to apply to all scheduled backups."
+  type        = map(string)
+  default     = {}
 }
