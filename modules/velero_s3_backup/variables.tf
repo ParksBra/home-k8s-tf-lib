@@ -107,7 +107,7 @@ variable "internal_kubectl_tag" {
 variable "aws_plugin_tag" {
   description = "The version tag for the Velero AWS plugin image."
   type        = string
-  default     = "v1.7.0"
+  default     = "latest"
 }
 
 variable "scheduled_backups" {
