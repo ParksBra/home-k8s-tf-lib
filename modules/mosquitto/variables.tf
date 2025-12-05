@@ -1,10 +1,3 @@
-# Python executable for password hasher
-variable "python_executable" {
-  description = "The Python executable to use for running the Mosquitto password hasher script. Must have the 'passlib' module installed."
-  type        = string
-  default     = "python3"
-}
-
 # Chart vars
 variable "namespace" {
   description = "The namespace in which to deploy the Helm chart."
