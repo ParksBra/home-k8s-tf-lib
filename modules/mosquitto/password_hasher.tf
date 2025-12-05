@@ -39,5 +39,5 @@ data "external" "mosquitto_password_hasher" {
     random_password.admin_password,
     random_password.admin_salt,
   ]
-  program = ["${var.python_executable}", "${path.module}/scripts/mosquitto_password_hasher.py", local.admin_password, random_password.admin_salt.result]
+  program = ["${path.module}/scripts/mosquitto_password_hasher.sh", local.admin_password, random_password.admin_salt.result]
 }
