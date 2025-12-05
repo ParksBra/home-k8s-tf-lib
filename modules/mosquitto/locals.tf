@@ -9,7 +9,7 @@ locals {
   persistence_path = "/mosquitto/data/"
   password_file_path = "/etc/mosquitto/passwordfile"
 
-  admin_password = var.admin_password != null ? var.admin_password : random_password.admin_password[0].result
+  admin_password = sensitive(var.admin_password != null ? var.admin_password : random_password.admin_password[0].result)
 }
 
 locals {
