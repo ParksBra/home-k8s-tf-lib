@@ -50,6 +50,6 @@ output "admin_username" {
 
 output "admin_password" {
   description = "The admin password for Mosquitto."
-  value       = var.admin_password
+  value       = local.admin_password
   sensitive   = true
 }
