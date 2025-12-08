@@ -11,41 +11,30 @@ fi
 PASSWORD="$1"
 SALT="$2"
 
-# If no salt is provided, generate a random 12-character alphanumeric string.
+ITERATIONS=101
+GENERATE_SALT_LENGTH=12
+
+# If no salt is provided, generate a random alphanumeric string.
 if [ -z "$SALT" ]; then
-    SALT=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 12 | head -n 1)
+    SALT=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $GENERATE_SALT_LENGTH | head -n 1)
 fi
 
-export TARGET_PASS="$PASSWORD"
-export TARGET_SALT="$SALT"
+SALT_ENCODED=$(echo -n "$SALT" | base64 -w0 | sed 's/=*$//')
 
-HASH_OUTPUT=$(perl -MDigest::SHA=hmac_sha512 -MMIME::Base64 -e '
-    use strict;
-    use warnings;
+to_hex() {
+    printf "%s" "$1" | od -A n -t x1 | tr -d ' \n'
+}
 
-    my $pass = $ENV{TARGET_PASS};
-    my $salt = $ENV{TARGET_SALT};
-    my $iterations = 101;
+PASSWORD_HEX=$(to_hex "$PASSWORD")
+SALT_HEX=$(to_hex "$SALT")
 
-    my $salt_encoded = encode_base64($salt, "");
-    $salt_encoded =~ s/=*$//; # Strip padding (=)
+B64_HASH=$(openssl kdf -keylen 64 -kdfopt digest:SHA512 \
+                    -kdfopt hexpass:$PASSWORD_HEX \
+                    -kdfopt hexsalt:$SALT_HEX \
+                    -kdfopt iter:$ITERATIONS \
+                    -binary PBKDF2 | base64 -w0)
 
-    my $block_num = pack("N", 1);
+B64_HASH="${B64_HASH%%=*}"
+B64_HASH="${B64_HASH}=="
 
-    my $u = hmac_sha512($salt . $block_num, $pass);
-    my $result = $u;
-
-    for (my $i = 2; $i <= $iterations; $i++) {
-        $u = hmac_sha512($u, $pass);
-        $result = $result ^ $u;
-    }
-
-    my $b64_hash = encode_base64($result, "");
-    $b64_hash =~ s/=*$//;
-    $b64_hash .= "==";
-
-    # Output format: $7$rounds$encoded_salt$encoded_hash
-    print "\$7\$${iterations}\$${salt_encoded}\$${b64_hash}";
-')
-
-printf '{"hashed_password": "%s"}' "$HASH_OUTPUT"
+printf '{"hashed_password": "%s"}' "\$7\$${ITERATIONS}\$${SALT_ENCODED}\$${B64_HASH}"
