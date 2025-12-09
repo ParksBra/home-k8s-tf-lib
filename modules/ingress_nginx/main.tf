@@ -32,6 +32,14 @@ resource "helm_release" "application" {
       value = var.service_load_balancer_class
     },
     {
+      name  = "controller.ingressClassResource.name"
+      value = var.ingress_class_resource_name
+    },
+    {
+      name  = "controller.ingressClass"
+      value = var.ingress_class_resource_name
+    },
+    {
       name  = "controller.service.ports.http"
       value = tostring(var.service_http_port)
     },

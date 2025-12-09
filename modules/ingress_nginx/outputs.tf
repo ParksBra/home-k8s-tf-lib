@@ -32,3 +32,8 @@ output "service_loadbalancer_ip" {
   description = "The LoadBalancer IP address assigned to the Ingress NGINX controller service. Null if service type is not LoadBalancer or if no LoadBalancer IP is assigned."
   value       = var.service_type == "LoadBalancer" && length(local.loadbalancer_ips) > 0 ? local.loadbalancer_ips[0].ip : null
 }
+
+output "ingress_class_name" {
+  description = "The ingress class name created for the Ingress NGINX controller."
+  value       = var.ingress_class_resource_name
+}

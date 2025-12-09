@@ -95,3 +95,9 @@ variable "creation_wait_seconds" {
   type        = number
   default     = 45
 }
+
+variable "ingress_class_resource_name" {
+  description = "The ingress class name to create the ingress class resource under."
+  type        = string
+  default     = "nginx"
+}
