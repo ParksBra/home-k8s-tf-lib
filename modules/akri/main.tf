@@ -18,6 +18,20 @@ resource "helm_release" "application" {
   replace           = var.chart_replace
   cleanup_on_fail   = var.chart_cleanup_on_fail
 
+  values = [
+    yamlencode(
+      {
+        udev = {
+          configuration = {
+            discoveryDetails = {
+              udevRules = var.udev_discovery_rules_list
+            }
+          }
+        }
+      }
+    )
+  ]
+
   set = [
     {
       name  = "kubernetesDistro"
@@ -74,12 +88,6 @@ resource "helm_release" "application" {
     {
       name  = "udev.discovery.enabled"
       value = tostring(var.udev_discovery_enabled)
-    }
-  ]
-  set_list = [
-    {
-      name  = "udev.configuration.discoveryDetails.udevRules"
-      value = var.udev_discovery_rules_list
     }
   ]
 }
