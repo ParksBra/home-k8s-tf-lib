@@ -19,16 +19,17 @@ resource "helm_release" "application" {
   cleanup_on_fail   = var.chart_cleanup_on_fail
 
   values = [
-    yamlencode({
-      udev = {
-        configuration = {
-          discoveryDetails = {
-            udevRules = var.udev_discovery_rules_list
+    yamlencode(
+      {
+        udev = {
+          configuration = {
+            discoveryDetails = {
+              udevRules = var.udev_discovery_rules_list
             }
           }
         }
       }
-    })
+    )
   ]
 
   set = [
