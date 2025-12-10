@@ -270,7 +270,7 @@ variable "codeserver_service_type" {
 variable "codeserver_service_port" {
   description = "The port exposed by the Home Assistant Code Server service."
   type        = number
-  default     = 12123
+  default     = 12321
 }
 
 variable "codeserver_ingress_enabled" {
