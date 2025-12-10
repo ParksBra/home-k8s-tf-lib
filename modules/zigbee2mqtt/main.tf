@@ -73,7 +73,7 @@ resource "helm_release" "application" {
         value = var.mqtt_broker_address
       },
       {
-        name  = "zigbee2mqtt.mqtt.username"
+        name  = "zigbee2mqtt.mqtt.user"
         value = var.mqtt_broker_username
       },
       {
