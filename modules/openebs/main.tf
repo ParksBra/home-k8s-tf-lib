@@ -46,6 +46,14 @@ resource "helm_release" "application" {
     {
       name  = "mayastor.csi.node.kubeletDir"
       value = var.kubelet_dir
+    },
+    {
+      name  = "mayastor.etcd.replicaCount"
+      value = tostring(1)
+    },
+    {
+      name  = "mayastor.nats.cluster.replicas"
+      value = tostring(1)
     }
   ]
 }
