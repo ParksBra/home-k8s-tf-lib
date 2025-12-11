@@ -25,7 +25,7 @@ resource "helm_release" "application" {
     },
     {
       name  = "engines.local.lvm.enabled"
-      value = "false"
+      value = "true"
     },
     {
       name  = "loki.enabled"
@@ -33,10 +33,18 @@ resource "helm_release" "application" {
     },
     {
       name  = "engines.replicated.mayastor.enabled"
-      value = "false"
+      value = "true"
     },
     {
       name  = "zfs-localpv.zfsNode.kubeletDir"
+      value = var.kubelet_dir
+    },
+    {
+      name  = "lvm-localpv.lvmNode.kubeletDir"
+      value = var.kubelet_dir
+    },
+    {
+      name  = "mayastor.csi.node.kubeletDir"
       value = var.kubelet_dir
     }
   ]
