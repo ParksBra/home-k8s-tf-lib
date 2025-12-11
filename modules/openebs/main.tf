@@ -54,6 +54,14 @@ resource "helm_release" "application" {
     {
       name  = "mayastor.nats.cluster.replicas"
       value = tostring(1)
+    },
+    {
+      name  = "nats.cluster.replicas"
+      value = tostring(1)
+    },
+    {
+      name  = "etcd.replicaCount"
+      value = tostring(1)
     }
   ]
 }
