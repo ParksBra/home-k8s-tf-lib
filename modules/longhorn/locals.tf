@@ -6,7 +6,7 @@ locals {
 
   namespace = var.namespace != null ? var.namespace : local.chart_install_name
 
-  tls_secret_name = "${local.chart_install_name}-ingress-tls"
+  ingress_tls_secret_name = "${local.chart_install_name}-ingress-tls"
 
   ingress_path = "/"
 

@@ -45,7 +45,7 @@ output "tls_enabled" {
 
 output "tls_secret_name" {
   description = "The name of the TLS secret used for Longhorn ingress."
-  value       = local.tls_secret_name
+  value       = local.ingress_tls_secret_name
 }
 
 output "storage_class_name" {
