@@ -60,24 +60,6 @@ variable "chart_cleanup_on_fail" {
 }
 
 # Longhorn specific vars
-variable "image_repository" {
-  description = "The Docker image repository for Longhorn."
-  type        = string
-  default     = "koenkk/Longhorn"
-}
-
-variable "image_tag" {
-  description = "The Docker image tag for Longhorn."
-  type        = string
-  default     = "latest"
-}
-
-variable "image_pull_policy" {
-  description = "The image pull policy for Longhorn."
-  type        = string
-  default     = "Always"
-}
-
 variable "ingress_enabled" {
   description = "Whether to enable ingress for Longhorn."
   type        = bool
@@ -106,12 +88,6 @@ variable "ingress_host_address" {
   description = "The host address for the Longhorn web ingress."
   type        = string
   default     = "longhorn.local"
-}
-
-variable "service_port" {
-  description = "The port exposed by the Longhorn service."
-  type        = number
-  default     = 8080
 }
 
 variable "service_type" {

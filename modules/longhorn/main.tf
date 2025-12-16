@@ -64,6 +64,10 @@ resource "helm_release" "application" {
         name  = "ingress.tlsSecret"
         value = local.ingress_tls_secret_name
       },
+      {
+        name  = "service.ui.type"
+        value = var.service_type
+      }
     ],
     [
       for k, v in var.ingress_annotations:

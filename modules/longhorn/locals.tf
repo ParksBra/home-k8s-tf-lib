@@ -9,4 +9,6 @@ locals {
   tls_secret_name = "${local.chart_install_name}-ingress-tls"
 
   ingress_path = "/"
+
+  service_port = 80
 }

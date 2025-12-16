@@ -4,12 +4,12 @@ output "namespace" {
 }
 
 output "chart_id" {
-  description = "The Helm release ID for Home Assistant."
+  description = "The Helm release ID for Longhorn."
   value       = helm_release.application.id
 }
 
 output "chart_name" {
-  description = "The Helm chart reference for Home Assistant."
+  description = "The Helm chart reference for Longhorn."
   value       = helm_release.application.name
 }
 
@@ -25,7 +25,7 @@ output "service_address" {
 
 output "service_port" {
   description = "The port of the Longhorn service."
-  value       = var.service_port
+  value       = local.service_port
 }
 
 output "ingress_enabled" {
@@ -51,4 +51,9 @@ output "tls_secret_name" {
 output "storage_class_name" {
   description = "The name of the storage class created by Longhorn."
   value       = var.storage_class_name
+}
+
+output "storage_class_reclaim_policy" {
+  description = "The reclaim policy of the storage class created by Longhorn."
+  value       = var.storage_reclaim_policy
 }
